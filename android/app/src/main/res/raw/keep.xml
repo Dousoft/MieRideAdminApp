@@ -1,0 +1,2 @@
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@raw/user_profile_sound,@raw/user_ride_sound,@raw/user_fund_sound,@raw/user_booking_sound" />
