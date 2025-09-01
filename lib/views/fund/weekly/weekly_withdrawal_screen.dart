@@ -106,8 +106,8 @@ class _WeeklyWithdrawalScreenState extends State<WeeklyWithdrawalScreen> {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8.w),
-            height: 36.h,
+            padding: EdgeInsets.symmetric(horizontal: 8.w).copyWith(top: 2),
+            height: 35.h,
             decoration: BoxDecoration(
               color: appColor.greyThemeColor,
               borderRadius: BorderRadius.circular(10.r),
@@ -139,16 +139,20 @@ class _WeeklyWithdrawalScreenState extends State<WeeklyWithdrawalScreen> {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              height: 38.h,
+              height: 35.h,
               decoration: BoxDecoration(
                 color: appColor.whiteThemeColor,
                 border:
-                    Border.all(color: appColor.greyDarkThemeColor, width: 1),
-                borderRadius: BorderRadius.circular(11.r),
+                Border.all(color: appColor.greyDarkThemeColor, width: 1),
+                borderRadius: BorderRadius.circular(10.r),
               ),
               child: Row(
                 children: [
-                  const Icon(CupertinoIcons.search, color: Colors.black54),
+                  Image.asset(
+                    'assets/icons/home/search.png',
+                    width: 22.sp,
+                    height: 22.sp,
+                  ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: TextField(
@@ -161,7 +165,7 @@ class _WeeklyWithdrawalScreenState extends State<WeeklyWithdrawalScreen> {
                         controller.currentPage.value = 1;
                         controller.getWeeklyWithdrawal();
                       },
-                      style: const TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 14.sp),
                     ),
                   ),
                 ],

@@ -8,25 +8,30 @@ class AppCustomTab extends StatefulWidget {
   final List<Widget> tabViews;
   final double decoratedBoxRadius;
   final double indicatorRadius;
+  final double? fontSize;
+  final EdgeInsetsGeometry? contentPadding;
   final Color indicatorSelectedColor;
   final Color indicatorUnSelectedColor;
   final Color tabBackGroundColor;
   final Color selectedLabelColor;
   final Color unSelectedLabelColor;
+  final ValueChanged<int>? onTabChange;
 
-  const AppCustomTab({
-    super.key,
-    required this.tabTitles,
-    this.tabCounts,
-    required this.tabViews,
-    required this.decoratedBoxRadius,
-    required this.indicatorRadius,
-    required this.indicatorSelectedColor,
-    required this.indicatorUnSelectedColor,
-    required this.tabBackGroundColor,
-    required this.selectedLabelColor,
-    required this.unSelectedLabelColor,
-  });
+  const AppCustomTab(
+      {super.key,
+      required this.tabTitles,
+      this.tabCounts,
+      this.fontSize,
+      this.contentPadding,
+      required this.tabViews,
+      required this.decoratedBoxRadius,
+      required this.indicatorRadius,
+      required this.indicatorSelectedColor,
+      required this.indicatorUnSelectedColor,
+      required this.tabBackGroundColor,
+      required this.selectedLabelColor,
+      required this.unSelectedLabelColor,
+      this.onTabChange});
 
   @override
   State<AppCustomTab> createState() => _AppCustomTabState();
@@ -47,6 +52,7 @@ class _AppCustomTabState extends State<AppCustomTab>
         FocusManager.instance.primaryFocus?.unfocus();
         selectedIndex = _tabController.index;
       });
+      widget.onTabChange?.call(selectedIndex);
     });
   }
 
@@ -67,8 +73,9 @@ class _AppCustomTabState extends State<AppCustomTab>
             borderRadius: BorderRadius.circular(widget.decoratedBoxRadius),
           ),
           child: TabBar(
-            padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w).copyWith(top: 5.h),
-            tabAlignment: TabAlignment.center,
+            padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w)
+                .copyWith(top: 5.h),
+            tabAlignment: TabAlignment.start,
             controller: _tabController,
             isScrollable: true,
             indicatorColor: Colors.transparent,
@@ -76,10 +83,12 @@ class _AppCustomTabState extends State<AppCustomTab>
             labelPadding: EdgeInsets.zero,
             tabs: List.generate(widget.tabTitles.length, (index) {
               final isSelected = selectedIndex == index;
-              final count = (widget.tabCounts != null && index < widget.tabCounts!.length)
-                  ? widget.tabCounts![index]
-                  : 0;
-              return _buildTab(widget.tabTitles[index], isSelected, count: count);
+              final count =
+                  (widget.tabCounts != null && index < widget.tabCounts!.length)
+                      ? widget.tabCounts![index]
+                      : 0;
+              return _buildTab(widget.tabTitles[index], isSelected,
+                  count: count);
             }),
           ),
         ),
@@ -103,30 +112,29 @@ class _AppCustomTabState extends State<AppCustomTab>
             children: [
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(horizontal: 6.w,vertical: 3),
+                margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 3),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? widget.indicatorSelectedColor
                       : widget.indicatorUnSelectedColor,
                   borderRadius: BorderRadius.circular(widget.indicatorRadius),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 6.h),
+                padding: widget.contentPadding??EdgeInsets.symmetric(horizontal: 11.w, vertical: 5.h).copyWith(top: 6.5.h),
                 child: Text(
                   title,
                   style: TextStyle(
                     color: isSelected
                         ? widget.selectedLabelColor
                         : widget.unSelectedLabelColor,
-                    fontSize: 12.sp,
-                    letterSpacing: 0.8,
-                    fontWeight:
-                        isSelected ? FontWeight.bold : FontWeight.normal,
+                    fontSize: widget.fontSize??11.sp,
+                    letterSpacing: 0.2,
+                    fontWeight: FontWeight.w700,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              if(!isSelected)CountBadge(count: count??0)
+              if (!isSelected) CountBadge(count: count ?? 0)
             ],
           ),
         ],

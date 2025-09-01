@@ -8,11 +8,13 @@ import 'package:mie_admin/utils/constants.dart';
 import 'package:mie_admin/views/root.dart';
 import 'package:mie_admin/views/splash_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   OneSignal.initialize(appNotificationId);
   OneSignal.Notifications.requestPermission(true);
+  tz.initializeTimeZones();
   await GetStorage.init();
   ablyService = AblyService();
   runApp(MyApp());

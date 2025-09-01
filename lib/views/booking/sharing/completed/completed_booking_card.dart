@@ -23,7 +23,7 @@ class CompletedBookingCard extends StatelessWidget {
           ),
           transition: Transition.rightToLeft),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 5.h),
+        margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 7.h),
         decoration: BoxDecoration(
           color: appColor.whiteThemeColor,
           borderRadius: BorderRadius.circular(12.r),
@@ -49,24 +49,24 @@ class CompletedBookingCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5.r),
                   ),
                   padding:
-                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h).copyWith(bottom: 2.h),
                   child: Text.rich(
                     TextSpan(
                       children: [
                         TextSpan(
                           text: 'Group ID :- ',
                           style: TextStyle(
-                            fontSize: 12.sp,
+                            fontSize: 11.sp,
                             color: Colors.white,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                         TextSpan(
                           text: booking["group_id"].toString(),
                           style: TextStyle(
-                            fontSize: 12.sp,
+                            fontSize: 11.sp,
                             color: Colors.white,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ],
@@ -77,13 +77,14 @@ class CompletedBookingCard extends StatelessWidget {
                   '${booking["first_pickup_date"]} ${booking["first_pickup_time"]}'
                       .toMonthYearTimeFormat(),
                   style: TextStyle(
-                    fontSize: 12.sp,
-                    color: Colors.grey,
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.bold,
+                    color: appColor.color6B6B6B,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 4.h),
+            SizedBox(height: 5.h),
             _buildInfoRow(
                 'Driver Name :- ', booking["driverDetails"]['first_name']),
             _buildInfoRow('Pickup City :- ', booking['pickup_city']),
@@ -117,13 +118,13 @@ class CompletedBookingCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5.r),
                     color: appColor.blackThemeColor,
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 1.h),
+                  padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h).copyWith(bottom: 1),
                   child: Text(
                     '\$${booking["total_driver_earning"]}',
                     style: TextStyle(
                       fontSize: 12.sp,
                       color: appColor.greenThemeColor,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -145,7 +146,7 @@ class CompletedBookingCard extends StatelessWidget {
               text: label,
               style: TextStyle(
                 fontSize: 12.sp,
-                color: Colors.black,
+                color: appColor.blackThemeColor,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -153,7 +154,7 @@ class CompletedBookingCard extends StatelessWidget {
               text: value,
               style: TextStyle(
                 fontSize: 12.sp,
-                color: valueColor ?? Colors.grey,
+                color: valueColor ?? appColor.color6B6B6B,
                 fontWeight: FontWeight.w400,
               ),
             ),

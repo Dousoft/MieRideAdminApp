@@ -53,7 +53,7 @@ class WeeklyWithdrawalCard extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: 8,
+            flex: 9,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -69,7 +69,7 @@ class WeeklyWithdrawalCard extends StatelessWidget {
                 ),
                 4.verticalSpace,
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 2).copyWith(bottom: 0),
                   height: 18.h,
                   decoration: BoxDecoration(
                     color: appColor.greyDarkThemeColor,
@@ -80,7 +80,7 @@ class WeeklyWithdrawalCard extends StatelessWidget {
                     children: [
                       Text(
                         'Payable Amount :- ',
-                        style: TextStyle(fontSize: 11.sp, color: Colors.black),
+                        style: TextStyle(fontSize: 11.5.sp, color: appColor.blackThemeColor),
                       ),
                       Text(
                         "\$${double.parse(weeklyWithdrawal['total_payable_amount']).toStringAsFixed(2)}",
@@ -155,13 +155,13 @@ class WeeklyWithdrawalCard extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(fontSize: 13.sp, color: Colors.black),
+          style: TextStyle(fontSize: 13.sp, color: appColor.blackThemeColor),
         ),
         Text(
           value,
           style: TextStyle(
             fontSize: 13.sp,
-            color: Colors.grey.shade600,
+            color: appColor.color6B6B6B,
             fontWeight: boldValue ? FontWeight.bold : FontWeight.normal,
           ),
         ),
@@ -173,7 +173,7 @@ class WeeklyWithdrawalCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(11.sp),
       decoration: BoxDecoration(
-        color: appColor.blackThemeColor,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(12.r),
         ),
@@ -186,15 +186,19 @@ class WeeklyWithdrawalCard extends StatelessWidget {
               color: appColor.greenThemeColor,
               borderRadius: BorderRadius.circular(4.5.r),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h)
+                .copyWith(bottom: 2.h),
             child: Text(
               "Driver ID :- ${weeklyWithdrawal['id'] ?? 'N/A'}",
-              style: TextStyle(fontSize: 13.sp, color: Colors.black),
+              style: TextStyle(
+                  fontSize: 13.sp,
+                  color: appColor.blackThemeColor,
+                  fontWeight: FontWeight.w700),
             ),
           ),
           Text('${weeklyWithdrawal['contact']}',
               style:
-                  TextStyle(fontSize: 12.sp, color: appColor.whiteThemeColor)),
+                  TextStyle(fontSize: 12.sp, color: appColor.whiteThemeColor,fontWeight: FontWeight.w700)),
         ],
       ),
     );
@@ -204,9 +208,11 @@ class WeeklyWithdrawalCard extends StatelessWidget {
       {required Function()? onPressed}) {
     return AppButton(
       btnText: label,
+      borderRadius: BorderRadius.circular(5.r),
       onPressed: onPressed,
       backgroundColor: color,
-      paddingVertical: 6.h,
+      fontSize: 11.sp,
+      paddingVertical: 7.h,
     );
   }
 }

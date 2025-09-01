@@ -8,8 +8,6 @@ import 'package:mie_admin/views/root.dart';
 import '../../repo/one_signal.dart';
 
 class LoginController extends GetxController {
-  final formKey = GlobalKey<FormState>();
-
   final email = ''.obs;
   final password = ''.obs;
   final isLoading = false.obs;
@@ -20,20 +18,31 @@ class LoginController extends GetxController {
   void setPassword(String value) => password.value = value;
 
   String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) return 'Email is required';
-    if (!GetUtils.isEmail(value)) return 'Enter a valid email';
+    if (value == null || value.isEmpty) return "Email required";
+    if (!GetUtils.isEmail(value)) return "Enter valid email";
     return null;
   }
 
   String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) return 'Password is required';
-    if (value.length < 6) return 'Password must be at least 6 characters';
+    if (value == null || value.isEmpty) return "Password required";
+    if (value.length < 6) return "At least 6 characters";
     return null;
   }
 
+
   Future<void> login() async {
     FocusManager.instance.primaryFocus?.unfocus();
-    if (!formKey.currentState!.validate()) return;
+    final emailError = validateEmail(email.value);
+    final passError = validatePassword(password.value);
+
+    if (emailError != null) {
+      EasyLoading.showToast(emailError);
+      return;
+    }
+    if (passError != null) {
+      EasyLoading.showToast(passError);
+      return;
+    }
 
     isLoading.value = true;
 

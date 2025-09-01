@@ -5,6 +5,7 @@ import 'package:mie_admin/controllers/booking/sharing/assigned_controller.dart';
 import 'package:mie_admin/utils/constants.dart';
 import '../../../../utils/components/loaders/build_small_loader.dart';
 import 'assigned_booking_card.dart';
+import 'assigned_expanded_card.dart';
 
 class AssignedScreen extends StatefulWidget {
   const AssignedScreen({super.key});

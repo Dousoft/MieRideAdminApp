@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:mie_admin/controllers/booking/sharing/accepted_controller.dart';
 import 'package:mie_admin/controllers/booking/sharing/assigned_controller.dart';
 import 'package:mie_admin/controllers/booking/sharing/cancelled_controller.dart';
+import 'package:mie_admin/controllers/booking/sharing/completed_controller.dart';
 import 'package:mie_admin/controllers/booking/sharing/enroute_controller.dart';
 import 'package:mie_admin/controllers/booking/sharing/manual_controller.dart';
 import 'package:mie_admin/controllers/booking/sharing/missed_controller.dart';
@@ -60,35 +61,49 @@ class AblyService {
       case "new-group-created":
       case "admin-group-recreate":
         groupRefresh();
+        routeRefresh();
         break;
 
       case "new-manual-booking":
+        assignedRefresh();
         manualRefresh();
         break;
 
       case "route-created":
+        groupRefresh();
         routeRefresh();
         break;
 
       case "booking-assigned":
         assignedRefresh();
+        manualRefresh();
+        routeRefresh();
         break;
 
       case "booking-cancelled":
       case "booking-canceled-auto":
         groupRefresh();
+        routeRefresh();
+        assignedRefresh();
+        acceptedRefresh();
+        manualRefresh();
+        enrouteRefresh();
+        missedRefresh();
         cancelledRefresh();
         break;
 
       case "new-missed-booking":
+        acceptedRefresh();
         missedRefresh();
         break;
 
       case "booking-enroute":
+        acceptedRefresh();
         enrouteRefresh();
         break;
 
       case "admin-booking-update":
+        enrouteRefresh();
         assignedRefresh();
         acceptedRefresh();
         break;
@@ -101,7 +116,7 @@ class AblyService {
       case "booking-missed":
         acceptedRefresh();
         enrouteRefresh();
-        cancelledRefresh();
+        completedRefresh();
       break;
 
       default:
@@ -191,6 +206,16 @@ class AblyService {
       cancel.getCancelledBooking();
     } else {
       debugPrint("CancelledController not registered");
+    }
+  }
+
+  void completedRefresh() {
+    if (Get.isRegistered<CompletedController>()) {
+      final complete = Get.find<CompletedController>();
+      complete.currentPage(1);
+      complete.getCompletedBooking();
+    } else {
+      debugPrint("CompletedController not registered");
     }
   }
 

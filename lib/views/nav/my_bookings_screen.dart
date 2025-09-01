@@ -17,36 +17,72 @@ class MyBookingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: AppCustomTab(
-          selectedLabelColor: appColor.blackThemeColor,
-          unSelectedLabelColor: appColor.whiteThemeColor,
-          tabBackGroundColor: appColor.blackThemeColor,
-          indicatorSelectedColor: appColor.greenThemeColor,
-          indicatorUnSelectedColor: Colors.transparent,
-          tabTitles: [
-            'Sharing Ride',
-            'Personal Ride',
-            'Family Ride',
-            "Drive's Availability",
-            "Driver's Route",
-            "Out Of Area"
-          ],
-          tabCounts: [
-            controller.notificationData['totalSharingNotifications']??0,
-            controller.notificationData['totalPersonalNotifications']??0,
-          ],
-          tabViews: [
-            SharingRideScreen(),
-            ComingSoon(),
-            ComingSoon(),
-            ComingSoon(),
-            ComingSoon(),
-            ComingSoon(),
-          ],
-          decoratedBoxRadius: 0,
-          indicatorRadius: 5.r,
+        body: Obx(
+          () {
+            var count = controller.unreadCategoryCounts.value;
+            return AppCustomTab(
+              fontSize: 12.sp,
+              selectedLabelColor: appColor.blackThemeColor,
+              unSelectedLabelColor: appColor.whiteThemeColor,
+              tabBackGroundColor: appColor.color353535,
+              indicatorSelectedColor: appColor.greenThemeColor,
+              indicatorUnSelectedColor: Colors.transparent,
+              tabTitles: [
+                'Sharing Ride',
+                'Personal Ride',
+                'Family Ride',
+                "Drive's Availability",
+                "Driver's Route",
+                "Out Of Area"
+              ],
+              tabCounts: [
+                count['totalSharingNotifications'] ?? 0,
+                count['totalPersonalNotifications'] ?? 0,
+                0,
+                0,
+                0,
+                count['out_of_area']
+              ],
+              tabViews: [
+                SharingRideScreen(),
+                ComingSoon(),
+                ComingSoon(),
+                ComingSoon(),
+                ComingSoon(),
+                ComingSoon(),
+              ],
+              decoratedBoxRadius: 0,
+              indicatorRadius: 5.r,
+              onTabChange: (index) {
+                handleTabSelection(index);
+              },
+            );
+          },
         ),
       ),
     );
   }
+
+  void handleTabSelection(int index) {
+    String? categoryKey;
+
+    switch (index) {
+      case 0:
+        categoryKey = "sharing";
+        break;
+      case 1:
+        categoryKey = "personal";
+        break;
+      case 5:
+        categoryKey = "out_of_area";
+        break;
+      default:
+        categoryKey = null;
+    }
+
+    if (categoryKey != null) {
+      controller.markCategoryAsRead(categoryKey);
+    }
+  }
+
 }

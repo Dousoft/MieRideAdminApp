@@ -90,7 +90,7 @@ class _GroupBookingCardState extends State<GroupBookingCard>
     return Container(
       padding: EdgeInsets.all(11.sp),
       decoration: BoxDecoration(
-        color: appColor.blackThemeColor,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(12.r),
         ),
@@ -111,13 +111,14 @@ class _GroupBookingCardState extends State<GroupBookingCard>
         color: appColor.greenThemeColor,
         borderRadius: BorderRadius.circular(4.5.r),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h)
+          .copyWith(bottom: 3),
       child: Text(
         'Group ID:- ${_firstBooking['group_id']}',
         style: TextStyle(
-          color: Colors.black,
-          fontSize: 12,
-        ),
+            fontSize: 12.5.sp,
+            color: appColor.blackThemeColor,
+            fontWeight: FontWeight.w700),
       ),
     );
   }
@@ -170,7 +171,7 @@ class _GroupBookingCardState extends State<GroupBookingCard>
                     _firstBooking['destination_city'] ?? 'N/A'),
                 _buildInfoRow(
                     'Booking Date',
-                    '${_firstBooking['booking_date']} ${_firstBooking['booking_time']}'.toMonthYearTimeFormat()),
+                    '${_firstBooking['booking_date']}'.toFormattedDate()),
                 _buildInfoRow(
                     'Time Choice',
                     _getFormattedTimeChoice(
@@ -219,17 +220,18 @@ class _GroupBookingCardState extends State<GroupBookingCard>
           Text(
             '$label :-  ',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w400,
               color: appColor.blackThemeColor,
-              fontSize: 12.sp,
+              fontSize: 13.sp,
             ),
           ),
           Expanded(
             child: Text(
               value,
               style: TextStyle(
-                color: Colors.grey.shade600,
-                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+                color: appColor.color6B6B6B,
+                fontSize: 13.sp,
               ),
             ),
           ),
@@ -264,7 +266,7 @@ class _GroupBookingCardState extends State<GroupBookingCard>
     return Container(
       padding: EdgeInsets.all(10.sp),
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(12.r),
         ),
@@ -295,7 +297,7 @@ class _GroupBookingCardState extends State<GroupBookingCard>
                 }
               },
               flex: 4),
-          if ((_firstBooking['total_number_of_people'] ?? 1) == 1) ...[
+          if ((_firstBooking['total_number_of_people'] ?? 1) <= 1) ...[
             8.horizontalSpace,
             _buildActionButton(
                 label: 'Switch Ride',

@@ -52,7 +52,7 @@ class _AppButtonState extends State<AppButton> {
       onTap: isProcessing ? null : _handleTap,
       child: Container(
         padding: EdgeInsets.symmetric(
-            horizontal: 2, vertical: widget.paddingVertical ?? 0),
+            horizontal: 2, vertical: widget.paddingVertical ?? 0).copyWith(bottom: (widget.paddingVertical??2.h)-2.h),
         decoration: BoxDecoration(
           color: widget.backgroundColor,
           borderRadius: widget.borderRadius ?? BorderRadius.circular(8.r),
@@ -65,6 +65,7 @@ class _AppButtonState extends State<AppButton> {
           style: TextStyle(
             fontSize: widget.fontSize ?? 12.5.sp,
             color: widget.textColor,
+            fontWeight: FontWeight.w400
           ),
         ),
       ),

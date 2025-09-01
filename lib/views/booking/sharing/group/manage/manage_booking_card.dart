@@ -35,7 +35,7 @@ class ManageBookingCard extends StatelessWidget {
                 children: [
                   Container(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h).copyWith(bottom: 1),
                     decoration: BoxDecoration(
                       color: isSelected
                           ? appColor.greenThemeColor

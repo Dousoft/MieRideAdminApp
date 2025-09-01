@@ -20,7 +20,7 @@ class CancelledBookingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 5.h),
+      margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       decoration: BoxDecoration(
         color: appColor.whiteThemeColor,
         borderRadius: BorderRadius.circular(12.r),
@@ -48,12 +48,16 @@ class CancelledBookingCard extends StatelessWidget {
                       child: _buildInfoRow('Username :- ',
                           '${booking["user_details"]['first_name']} ${booking["user_details"]['last_name']}'),
                     ),
-                    _buildInfoRow(
-                        '',
-                        '${booking["booking_date"]} ${booking['booking_time']}'
-                            .toMonthYearTimeFormat())
+                    Text('${booking["booking_date"]} ${booking['booking_time']}'.toMonthYearTimeFormat(),
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        color: appColor.color6B6B6B,
+                        letterSpacing: -0.5,
+                        fontWeight: FontWeight.w700,
+                      ),)
                   ],
                 ),
+                2.verticalSpace,
                 Row(
                   children: [
                     Expanded(
@@ -61,6 +65,7 @@ class CancelledBookingCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _buildInfoRow('Pickup Address :- ', booking['source']),
+                        2.verticalSpace,
                         _buildInfoRow(
                             'Drop-off Address :- ', booking["destination"]),
                       ],
@@ -163,7 +168,8 @@ class CancelledBookingCard extends StatelessWidget {
         onPressed: onPressed ?? () {},
         textColor: Colors.black,
         backgroundColor: bgColor,
-        paddingVertical: 6.h,
+        paddingVertical: 6.5.h,
+        borderRadius: BorderRadius.circular(6.r),
       ),
     );
   }
@@ -178,7 +184,7 @@ class CancelledBookingCard extends StatelessWidget {
               text: label,
               style: TextStyle(
                 fontSize: 12.sp,
-                color: Colors.black,
+                color: appColor.blackThemeColor,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -186,7 +192,7 @@ class CancelledBookingCard extends StatelessWidget {
               text: value,
               style: TextStyle(
                 fontSize: 12.sp,
-                color: valueColor ?? Colors.grey,
+                color: valueColor ?? appColor.color6B6B6B,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -221,14 +227,15 @@ class CancelledBookingCard extends StatelessWidget {
         color: appColor.greenThemeColor,
         borderRadius: BorderRadius.circular(4.5.r),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h)
+          .copyWith(bottom: 2.h),
       child: Text(
         'Booking ID:- ${booking['id']}',
         style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
-          fontSize: 12,
-        ),
+            fontSize: 12.sp,
+            letterSpacing: -0.3,
+            color: appColor.blackThemeColor,
+            fontWeight: FontWeight.w700),
       ),
     );
   }
@@ -239,25 +246,26 @@ class CancelledBookingCard extends StatelessWidget {
         color: appColor.whiteThemeColor,
         borderRadius: BorderRadius.circular(4.5.r),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h)
+          .copyWith(bottom: 2.h),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             'Cancelled By :- ',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 12,
-            ),
+                fontSize: 12.sp,
+                letterSpacing: -0.3,
+                color: appColor.blackThemeColor,
+                fontWeight: FontWeight.w700),
           ),
           Text(
             '${booking['cancel_by'].toString().capitalizeFirst}',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 12,
-            ),
+                fontSize: 12.sp,
+                letterSpacing: -0.3,
+                color: appColor.blackThemeColor,
+                fontWeight: FontWeight.w700),
           ),
         ],
       ),

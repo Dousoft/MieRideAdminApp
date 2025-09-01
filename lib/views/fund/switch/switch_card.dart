@@ -73,22 +73,22 @@ class SwitchCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(12.w),
       child: Column(
+        spacing: 4,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               Text("Name :-  ",
-                  style: TextStyle(fontSize: 13.sp, color: Colors.black)),
+                  style: TextStyle(fontSize: 13.sp, color: appColor.blackThemeColor)),
               Text("${user?['first_name'] ?? ''} ${user?['last_name'] ?? ''}",
                   style:
-                      TextStyle(fontSize: 13.sp, color: Colors.grey.shade600)),
+                      TextStyle(fontSize: 13.sp, color: appColor.color6B6B6B)),
             ],
           ),
-          4.verticalSpace,
           Row(
             children: [
               Text("Switch From :-  ",
-                  style: TextStyle(fontSize: 13.sp, color: Colors.black)),
+                  style: TextStyle(fontSize: 13.sp, color: appColor.blackThemeColor)),
               Text(getMethodName(switchAccount['switch_from']),
                   style: TextStyle(
                       fontSize: 13.sp,
@@ -96,25 +96,23 @@ class SwitchCard extends StatelessWidget {
                       fontWeight: FontWeight.bold)),
             ],
           ),
-          4.verticalSpace,
           Row(
             children: [
               Text("Switch To. :-  ",
-                  style: TextStyle(fontSize: 13.sp, color: Colors.black)),
+                  style: TextStyle(fontSize: 13.sp, color: appColor.blackThemeColor)),
               Text(getMethodName(switchAccount['switch_to']),
                   style: TextStyle(
                       fontSize: 13.sp,
-                      color: Color(0xffFFB500),
+                      color: appColor.colorFFB500,
                       fontWeight: FontWeight.bold)),
             ],
           ),
           if ((switchAccount['driver_account_details']['file'] ?? '').toString().isNotEmpty)
           ...[
-            4.verticalSpace,
             Row(
               children: [
                 Text("Account :-   ",
-                    style: TextStyle(fontSize: 13.sp)),
+                    style: TextStyle(fontSize: 13.sp,color: appColor.blackThemeColor)),
                 GestureDetector(
                   onTap: () => Get.dialog(
                     Dialog(
@@ -208,10 +206,10 @@ class SwitchCard extends StatelessWidget {
               ],
             )
           ],
-          8.verticalSpace,
+          4.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 20.w,
+              horizontal: 22.w,
             ),
             child: (status == '1')
                 ? _statusButton("Accepted", Color(0xff00A431))
@@ -246,15 +244,15 @@ class SwitchCard extends StatelessWidget {
                                 ),
                               ],
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(6.r),
                               ),
                               offset: const Offset(0, 30),
                               child: Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 12.w, vertical: 6.h),
+                                    horizontal: 12.w, vertical: 7.h).copyWith(bottom: 6),
                                 decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(8),
+                                  color: appColor.color353535,
+                                  borderRadius: BorderRadius.circular(6.r),
                                 ),
                                 child: Row(
                                   mainAxisAlignment:
@@ -293,7 +291,7 @@ class SwitchCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(11.sp),
       decoration: BoxDecoration(
-        color: appColor.blackThemeColor,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(12.r),
         ),
@@ -306,15 +304,19 @@ class SwitchCard extends StatelessWidget {
               color: appColor.greenThemeColor,
               borderRadius: BorderRadius.circular(4.5.r),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h)
+                .copyWith(bottom: 2.h),
             child: Text(
               "Driver ID :- ${switchAccount['driver_id'] ?? 'N/A'}",
-              style: TextStyle(fontSize: 13.sp, color: Colors.black),
+              style: TextStyle(
+                  fontSize: 13.sp,
+                  color: appColor.blackThemeColor,
+                  fontWeight: FontWeight.w700),
             ),
           ),
           Text(formattedDateTime,
               style:
-                  TextStyle(fontSize: 12.sp, color: appColor.greenThemeColor)),
+                  TextStyle(fontSize: 11.sp, color: appColor.greenThemeColor,fontWeight: FontWeight.w700)),
         ],
       ),
     );
@@ -324,8 +326,9 @@ class SwitchCard extends StatelessWidget {
     return AppButton(
       btnText: label,
       onPressed: () {},
-      backgroundColor: color,
-      paddingVertical: 6.h,
+      backgroundColor: color,borderRadius: BorderRadius.circular(6.r),
+      
+      paddingVertical: 6.5.h,
     );
   }
 }

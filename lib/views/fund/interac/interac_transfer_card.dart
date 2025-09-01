@@ -94,30 +94,38 @@ class InteracTransferCard extends StatelessWidget {
                   Row(
                     children: [
                       Text("Name :-  ",
-                          style:
-                              TextStyle(fontSize: 13.sp, color: Colors.black)),
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              color: appColor.blackThemeColor,
+                              fontWeight: FontWeight.w400)),
                       Text(
                           "${user?['first_name'] ?? ''} ${user?['last_name'] ?? ''}",
                           style: TextStyle(
-                              fontSize: 13.sp, color: Colors.grey.shade600)),
+                              fontSize: 13.sp,
+                              color: appColor.color6B6B6B,
+                              fontWeight: FontWeight.w400)),
                     ],
                   ),
                   4.verticalSpace,
                   Row(
                     children: [
                       Text("Transaction Proof :-   ",
-                          style: TextStyle(fontSize: 13.sp)),
+                          style: TextStyle(
+                              fontSize: 13.sp, fontWeight: FontWeight.w400)),
                       if ((transaction['image'] ?? '').toString().isNotEmpty)
                         GestureDetector(
                           onTap: () => Get.dialog(
                             Dialog(
-                              insetPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
+                              insetPadding: EdgeInsets.symmetric(
+                                  horizontal: 20.w, vertical: 24.h),
                               backgroundColor: Colors.transparent,
                               child: Stack(
                                 clipBehavior: Clip.none,
                                 children: [
                                   Container(
-                                    constraints: BoxConstraints(minHeight: 210.h,minWidth: double.infinity),
+                                    constraints: BoxConstraints(
+                                        minHeight: 210.h,
+                                        minWidth: double.infinity),
                                     decoration: BoxDecoration(
                                       color: appColor.whiteThemeColor,
                                       borderRadius: BorderRadius.circular(12.r),
@@ -139,22 +147,30 @@ class InteracTransferCard extends StatelessWidget {
                                       child: Image.network(
                                         '${transaction['image']}',
                                         fit: BoxFit.contain,
-                                        loadingBuilder: (context, child, loadingProgress) {
-                                          if (loadingProgress == null) return child;
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                          if (loadingProgress == null)
+                                            return child;
                                           return SizedBox(
                                             height: 200.h,
                                             child: Center(
                                               child: CircularProgressIndicator(
-                                                value: loadingProgress.expectedTotalBytes != null
-                                                    ? loadingProgress.cumulativeBytesLoaded /
-                                                    (loadingProgress.expectedTotalBytes ?? 1)
+                                                value: loadingProgress
+                                                            .expectedTotalBytes !=
+                                                        null
+                                                    ? loadingProgress
+                                                            .cumulativeBytesLoaded /
+                                                        (loadingProgress
+                                                                .expectedTotalBytes ??
+                                                            1)
                                                     : null,
                                                 color: Colors.black,
                                               ),
                                             ),
                                           );
                                         },
-                                        errorBuilder: (context, error, stackTrace) {
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
                                           return SizedBox(
                                             height: 200.h,
                                             child: Center(
@@ -222,8 +238,8 @@ class InteracTransferCard extends StatelessWidget {
                     : Row(
                         children: [
                           Expanded(
-                              child:
-                                  _statusButton("New Request", Color(0xff3B82F6))),
+                              child: _statusButton(
+                                  "New Request", Color(0xff3B82F6))),
                           10.horizontalSpace,
                           Expanded(
                             child: PopupMenuButton<int>(
@@ -289,7 +305,7 @@ class InteracTransferCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(11.sp),
       decoration: BoxDecoration(
-        color: appColor.blackThemeColor,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(12.r),
         ),
@@ -302,15 +318,21 @@ class InteracTransferCard extends StatelessWidget {
               color: appColor.greenThemeColor,
               borderRadius: BorderRadius.circular(4.5.r),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h)
+                .copyWith(bottom: 2.h),
             child: Text(
               "User ID :- ${user?['id'] ?? 'N/A'}",
-              style: TextStyle(fontSize: 13.sp, color: Colors.black),
+              style: TextStyle(
+                  fontSize: 13.sp,
+                  color: appColor.blackThemeColor,
+                  fontWeight: FontWeight.w700),
             ),
           ),
           Text(formattedDate,
-              style:
-                  TextStyle(fontSize: 12.sp, color: appColor.greenThemeColor)),
+              style: TextStyle(
+                  fontSize: 11.sp,
+                  color: appColor.greenThemeColor,
+                  fontWeight: FontWeight.w700)),
         ],
       ),
     );

@@ -102,7 +102,6 @@ class _AssignDriverScreenState extends State<AssignDriverScreen> {
                             _buildTopCards(),
                             16.verticalSpace,
                             _buildCenterCard(),
-                            8.verticalSpace,
                           ],
                         ),
                       ),
@@ -380,6 +379,8 @@ class _AssignDriverScreenState extends State<AssignDriverScreen> {
           'Manual',
           'All',
         ],
+        fontSize: 12.sp,
+        contentPadding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 4.h).copyWith(top: 5.h),
         tabViews: [
           RouteAndAvailabilityDriverList(didAllSelect: true, type: "route"),
           RouteAndAvailabilityDriverList(

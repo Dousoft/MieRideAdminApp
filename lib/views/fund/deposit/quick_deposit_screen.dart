@@ -108,16 +108,20 @@ class _QuickDepositScreenState extends State<QuickDepositScreen> {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              height: 38.h,
+              height: 35.h,
               decoration: BoxDecoration(
                 color: appColor.whiteThemeColor,
                 border:
-                    Border.all(color: appColor.greyDarkThemeColor, width: 1),
-                borderRadius: BorderRadius.circular(11.r),
+                Border.all(color: appColor.greyDarkThemeColor, width: 1),
+                borderRadius: BorderRadius.circular(10.r),
               ),
               child: Row(
                 children: [
-                  const Icon(CupertinoIcons.search, color: Colors.black54),
+                  Image.asset(
+                    'assets/icons/home/search.png',
+                    width: 22.sp,
+                    height: 22.sp,
+                  ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: TextField(
@@ -130,17 +134,17 @@ class _QuickDepositScreenState extends State<QuickDepositScreen> {
                         controller.currentPage.value = 1;
                         controller.getQuickDeposit();
                       },
-                      style: const TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 14.sp),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 10),
           Container(
-            height: 38.h,
-            width: 38.h,
+            height: 35.h,
+            width: 35.h,
             decoration: BoxDecoration(
               color: appColor.whiteThemeColor,
               border: Border.all(color: appColor.greyDarkThemeColor, width: 1),

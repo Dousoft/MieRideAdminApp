@@ -50,7 +50,7 @@ class EnrouteBookingCard extends StatelessWidget {
     return Container(
         padding: EdgeInsets.all(10.sp),
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: appColor.color353535,
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(12.r),
           ),
@@ -58,15 +58,17 @@ class EnrouteBookingCard extends StatelessWidget {
         child: Row(
           spacing: 8.w,
           children: [
-            _buildActionButton(label: 'Manage', onPressed: () {
-              Get.to(
+            _buildActionButton(
+                label: 'Manage',
+                onPressed: () {
+                  Get.to(
                       () => ManageScreen(
-                    bookings: _getbooking,
-                        type: ManageType.enroute,
-                  ),
-                  transition: Transition.rightToLeft,
-                  duration: Duration(milliseconds: 300));
-            }),
+                            bookings: _getbooking,
+                            type: ManageType.enroute,
+                          ),
+                      transition: Transition.rightToLeft,
+                      duration: Duration(milliseconds: 300));
+                }),
             _buildActionButton(
                 label: 'Payment',
                 onPressed: () {
@@ -103,7 +105,6 @@ class EnrouteBookingCard extends StatelessWidget {
                       return Dialog(
                         backgroundColor: Colors.transparent,
                         insetPadding: EdgeInsets.symmetric(horizontal: 24.w),
-                        // child: Container(child: Text('Comming Soon'),color: Colors.white,padding: EdgeInsets.all(20.sp),),
                         child: EnrouteExpandedCard(item: _getbooking),
                       );
                     },
@@ -124,7 +125,7 @@ class EnrouteBookingCard extends StatelessWidget {
         btnText: label,
         onPressed: onPressed,
         processingText: processingText,
-        paddingVertical: 6.h,
+        paddingVertical: 8.h,
       ),
     );
   }
@@ -143,6 +144,25 @@ class EnrouteBookingCard extends StatelessWidget {
               _infoColumn('Booking Time',
                   '${_getbooking['first_pickup_time']}'.toFormattedTime()),
             ],
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.only(bottom: 4.h),
+            decoration: BoxDecoration(
+              color: appColor.blackThemeColor,
+              borderRadius: BorderRadius.circular(10.r),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h)
+                .copyWith(bottom: 8.h),
+            child: Text(
+              _getbooking['driver_last_location_update'],
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14.sp),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           _buildDriverDetails(),
           AppLeftIconButton(
@@ -185,7 +205,7 @@ class EnrouteBookingCard extends StatelessWidget {
             width: 62.w,
             height: 62.w,
             decoration: BoxDecoration(
-                color: appColor.greyThemeColor,
+                color: appColor.color353535,
                 borderRadius: BorderRadius.circular(12.r),
                 boxShadow: [
                   BoxShadow(
@@ -233,17 +253,18 @@ class EnrouteBookingCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 1.h),
+                  padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 2.h)
+                      .copyWith(bottom: 1),
                   decoration: BoxDecoration(
                     color: Colors.black87,
-                    borderRadius: BorderRadius.circular(6.r),
+                    borderRadius: BorderRadius.circular(4.r),
                   ),
                   child: Text(
                     "ID :- ${driverDetails['id']}",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 10.sp,
                     ),
                   ),
                 ),
@@ -261,7 +282,7 @@ class EnrouteBookingCard extends StatelessWidget {
                   spacing: 2.w,
                   children: [
                     Text(
-                      "(${double.parse((booking['driver_rating']??0).toString()).toStringAsFixed(1)})",
+                      "(${double.parse((booking['driver_rating'] ?? 0).toString()).toStringAsFixed(1)})",
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.bold,
@@ -290,9 +311,10 @@ class EnrouteBookingCard extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 7.h),
+                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8.h)
+                      .copyWith(bottom: 5.h),
                   decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: appColor.color353535,
                     borderRadius: BorderRadius.circular(4.r),
                   ),
                   alignment: Alignment.center,
@@ -318,13 +340,17 @@ class EnrouteBookingCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: TextStyle(fontSize: 13.sp)),
-          SizedBox(height: 1.h),
+          Text(label,
+              style: TextStyle(
+                  fontSize: 13.2.sp,
+                  fontWeight: FontWeight.w400,
+                  color: appColor.blackThemeColor)),
           Text(
             value,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                fontSize: 17.sp,
+                fontWeight: FontWeight.w700,
+                color: appColor.blackThemeColor),
           ),
         ],
       ),
@@ -340,7 +366,7 @@ class EnrouteBookingCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(11.sp),
       decoration: BoxDecoration(
-        color: appColor.blackThemeColor,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(12.r),
         ),
@@ -353,14 +379,14 @@ class EnrouteBookingCard extends StatelessWidget {
               color: appColor.greenThemeColor,
               borderRadius: BorderRadius.circular(4.5.r),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h)
+                .copyWith(bottom: 2.h),
             child: Text(
               'Group ID:- ${_getbooking['group_id']}',
               style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                fontSize: 12,
-              ),
+                  fontSize: 12.5.sp,
+                  color: appColor.blackThemeColor,
+                  fontWeight: FontWeight.w700),
             ),
           ),
           Text(
