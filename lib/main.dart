@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return GetMaterialApp(
-          title: 'MIE Admin',
+          title: 'MieRide Desk',
           theme: ThemeData(
             fontFamily: appFont,
             useMaterial3: true,
