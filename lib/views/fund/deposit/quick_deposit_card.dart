@@ -81,7 +81,7 @@ class QuickDepositCard extends StatelessWidget {
 
   Widget _buildContents(user, status) {
     return Padding(
-      padding: EdgeInsets.all(12.w),
+      padding: EdgeInsets.all(12.w).copyWith(top: 8.sp),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -90,16 +90,16 @@ class QuickDepositCard extends StatelessWidget {
               Row(
                 children: [
                   Text("Name :-  ",
-                      style: TextStyle(fontSize: 13.sp, color: Colors.black)),
+                      style: TextStyle(fontSize: 13.sp, color: appColor.blackThemeColor,fontWeight: FontWeight.w400)),
                   Text(
                       "${user?['first_name'] ?? ''} ${user?['last_name'] ?? ''}",
                       style: TextStyle(
-                          fontSize: 13.sp, color: Colors.grey.shade600)),
+                          fontSize: 13.sp, color: appColor.color6B6B6B,fontWeight: FontWeight.w400)),
                   Spacer(),
                   Text(
                     "\$${(deposit['amount'] ?? 0)}",
                     style:
-                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700),
                   )
                 ],
               ),
@@ -110,7 +110,7 @@ class QuickDepositCard extends StatelessWidget {
                     child: Text(
                       deposit['transaction_id'] ?? "N/A",
                       style: TextStyle(
-                          fontSize: 12.sp, color: Colors.grey.shade600),
+                          fontSize: 12.sp, color: appColor.color6B6B6B,fontWeight: FontWeight.w400),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
@@ -147,7 +147,7 @@ class QuickDepositCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(11.sp),
       decoration: BoxDecoration(
-        color: appColor.blackThemeColor,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(12.r),
         ),
@@ -160,15 +160,19 @@ class QuickDepositCard extends StatelessWidget {
               color: appColor.greenThemeColor,
               borderRadius: BorderRadius.circular(4.5.r),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h)
+                .copyWith(bottom: 2.h),
             child: Text(
               "User ID :- ${user?['id'] ?? 'N/A'}",
-              style: TextStyle(fontSize: 13.sp, color: Colors.black),
+              style: TextStyle(
+                  fontSize: 13.sp,
+                  color: appColor.blackThemeColor,
+                  fontWeight: FontWeight.w700),
             ),
           ),
           Text(formattedDate,
               style:
-                  TextStyle(fontSize: 12.sp, color: appColor.greenThemeColor)),
+                  TextStyle(fontSize: 11.sp, color: appColor.greenThemeColor,fontWeight: FontWeight.w700)),
         ],
       ),
     );
@@ -178,6 +182,7 @@ class QuickDepositCard extends StatelessWidget {
     return AppButton(
       btnText: label,
       onPressed: () {},
+      borderRadius: BorderRadius.circular(6.r),
       backgroundColor: color,
       paddingVertical: 6.h,
     );

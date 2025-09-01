@@ -34,7 +34,6 @@ String? userEmail;
 // String appFont = 'PowerGrotesk';
 // String appFont = 'Inter';
 String appFont = 'Nexa';
-// String appFont = 'NexaBold';
 
 /// single tone instance
 StorageService storageService = StorageService();

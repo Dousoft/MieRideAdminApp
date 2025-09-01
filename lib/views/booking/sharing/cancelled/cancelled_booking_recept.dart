@@ -77,7 +77,7 @@ class CancelReceiptDialog extends StatelessWidget {
                           children: [
                             Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w, vertical: 2.h),
+                                  horizontal: 10.w, vertical: 3.h).copyWith(bottom: 1.h),
                               decoration: BoxDecoration(
                                 color: appColor.blackThemeColor,
                                 borderRadius: BorderRadius.circular(5.r),
@@ -126,8 +126,8 @@ class CancelReceiptDialog extends StatelessWidget {
                               ),
                               Container(
                                 padding: EdgeInsets.symmetric(
-                                        horizontal: 10.w, vertical: 2.h)
-                                    .copyWith(bottom: 1),
+                                        horizontal: 10.w, vertical: 2)
+                                    .copyWith(bottom: 1.h),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5.r),
                                   color: appColor.greenThemeColor,
@@ -237,6 +237,7 @@ class CancelReceiptDialog extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(6.r),
                               ),
+                              padding: EdgeInsets.only(top: 2)
                             ),
                             onPressed: () => Navigator.pop(context),
                             child: Text(

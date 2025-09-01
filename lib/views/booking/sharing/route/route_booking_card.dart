@@ -90,7 +90,7 @@ class _RouteBookingCardState extends State<RouteBookingCard>
     return Container(
       padding: EdgeInsets.all(10.sp),
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(12.r),
         ),
@@ -273,10 +273,10 @@ class _RouteBookingCardState extends State<RouteBookingCard>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: TextStyle(fontSize: 13.5.sp)),
+          Text(label, style: TextStyle(fontSize: 13.2.sp,fontWeight: FontWeight.w400, color: appColor.blackThemeColor)),
           Text(
             value,
-            style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w700,color: appColor.blackThemeColor),
           ),
         ],
       ),
@@ -296,7 +296,7 @@ class _RouteBookingCardState extends State<RouteBookingCard>
         btnText: label,
         onPressed: onPressed,
         processingText: processingText,
-        paddingVertical: 6.h,
+        paddingVertical: 8.h,
       ),
     );
   }
@@ -305,7 +305,7 @@ class _RouteBookingCardState extends State<RouteBookingCard>
     return Container(
       padding: EdgeInsets.all(11.sp),
       decoration: BoxDecoration(
-        color: appColor.blackThemeColor,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(12.r),
         ),
@@ -326,13 +326,14 @@ class _RouteBookingCardState extends State<RouteBookingCard>
         color: appColor.greenThemeColor,
         borderRadius: BorderRadius.circular(4.5.r),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h)
+          .copyWith(bottom: 3),
       child: Text(
         'Group ID:- ${_getRoute['group_id']}',
         style: TextStyle(
-          color: Colors.black,
-          fontSize: 12,
-        ),
+            fontSize: 12.5.sp,
+            color: appColor.blackThemeColor,
+            fontWeight: FontWeight.w700),
       ),
     );
   }

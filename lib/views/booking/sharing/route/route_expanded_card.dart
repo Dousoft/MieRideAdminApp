@@ -65,7 +65,7 @@ class RouteExpandedCard extends StatelessWidget {
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(5.r),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h).copyWith(bottom: 1.h),
                   child: Text(
                     'Booking ID :- $bookingID',
                     style: TextStyle(
@@ -80,11 +80,11 @@ class RouteExpandedCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: 'Username :- ',
-                        style: TextStyle(fontSize: 13.sp, color: Colors.black),
+                        style: TextStyle(fontSize: 12.sp, color: Colors.black),
                       ),
                       TextSpan(
                         text: userName,
-                        style: TextStyle(fontSize: 13.sp, color: Colors.grey),
+                        style: TextStyle(fontSize: 12.sp, color: appColor.color6B6B6B),
                       ),
                     ],
                   ),
@@ -95,11 +95,11 @@ class RouteExpandedCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: 'Source :- ',
-                        style: TextStyle(fontSize: 13.sp, color: Colors.black),
+                        style: TextStyle(fontSize: 12.sp, color: Colors.black),
                       ),
                       TextSpan(
                         text: source,
-                        style: TextStyle(fontSize: 13.sp, color: Colors.grey),
+                        style: TextStyle(fontSize: 12.sp, color: appColor.color6B6B6B),
                       ),
                     ],
                   ),
@@ -176,7 +176,7 @@ class RouteExpandedCard extends StatelessWidget {
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(5.r),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h).copyWith(bottom: 1.h),
                       child: Text(
                         'Booking ID :- $bookingID',
                         style: TextStyle(
@@ -200,11 +200,11 @@ class RouteExpandedCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: 'Username :- ',
-                        style: TextStyle(fontSize: 13.sp, color: Colors.black),
+                        style: TextStyle(fontSize: 12.sp, color: Colors.black),
                       ),
                       TextSpan(
                         text: userName,
-                        style: TextStyle(fontSize: 13.sp, color: Colors.grey),
+                        style: TextStyle(fontSize: 12.sp, color: appColor.color6B6B6B),
                       ),
                     ],
                   ),
@@ -215,11 +215,11 @@ class RouteExpandedCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: 'Destination :- ',
-                        style: TextStyle(fontSize: 13.sp, color: Colors.black),
+                        style: TextStyle(fontSize: 12.sp, color: Colors.black),
                       ),
                       TextSpan(
                         text: destination,
-                        style: TextStyle(fontSize: 13.sp, color: Colors.grey),
+                        style: TextStyle(fontSize: 12.sp, color: appColor.color6B6B6B),
                       ),
                     ],
                   ),

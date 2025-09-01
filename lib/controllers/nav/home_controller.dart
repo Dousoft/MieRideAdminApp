@@ -212,7 +212,7 @@ class HomeController extends GetxController {
         value: "\$${data["driver_weekly_payout"]}",
         percentage: (data["driver_weekly_payout_percentage"] ?? 0).toDouble(),
         trend: data["driver_weekly_payout_trend"] ?? "equal",
-        icon: 'assets/icons/nav/img_1.png',
+        icon: 'assets/icons/home/driverpayout.png',
           subTitle: 'From the last week'
       ),
     ];

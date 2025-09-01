@@ -111,7 +111,7 @@ class EnrouteExpandedCard extends StatelessWidget {
         color: appColor.greenThemeColor,
         borderRadius: BorderRadius.circular(4.5.r),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h).copyWith(bottom: 2.h),
       child: Text(
         'Group ID :- ${item['group_id']}',
         style: TextStyle(

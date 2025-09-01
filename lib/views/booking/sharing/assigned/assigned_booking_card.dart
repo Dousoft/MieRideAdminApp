@@ -6,7 +6,7 @@ import 'package:mie_admin/utils/constants.dart';
 import 'package:mie_admin/utils/extensions.dart';
 import '../../../../controllers/booking/sharing/assigned_controller.dart';
 import '../../../../utils/components/dialogs/payment_details_dialog.dart';
-import 'accepted_expanded_card.dart';
+import 'assigned_expanded_card.dart';
 
 class AssignedBookingCard extends StatelessWidget {
   final Map<String, dynamic> booking;
@@ -45,7 +45,7 @@ class AssignedBookingCard extends StatelessWidget {
     return Container(
         padding: EdgeInsets.all(10.sp),
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: appColor.color353535,
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(12.r),
           ),
@@ -105,7 +105,7 @@ class AssignedBookingCard extends StatelessWidget {
                       return Dialog(
                         backgroundColor: Colors.transparent,
                         insetPadding: EdgeInsets.symmetric(horizontal: 24.w),
-                        child: AcceptedExpandedCard(item: _getbooking),
+                        child: AssignedExpandedCard(item: _getbooking),
                       );
                     },
                   );
@@ -125,7 +125,7 @@ class AssignedBookingCard extends StatelessWidget {
         btnText: label,
         onPressed: onPressed,
         processingText: processingText,
-        paddingVertical: 6.h,
+        paddingVertical: 8.h,
       ),
     );
   }
@@ -213,13 +213,10 @@ class AssignedBookingCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: TextStyle(fontSize: 13.sp)),
-          SizedBox(height: 1.h),
+          Text(label, style: TextStyle(fontSize: 13.2.sp,fontWeight: FontWeight.w400, color: appColor.blackThemeColor)),
           Text(
             value,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w700,color: appColor.blackThemeColor),
           ),
         ],
       ),
@@ -230,7 +227,7 @@ class AssignedBookingCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(11.sp),
       decoration: BoxDecoration(
-        color: appColor.blackThemeColor,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(12.r),
         ),
@@ -242,14 +239,14 @@ class AssignedBookingCard extends StatelessWidget {
               color: appColor.greenThemeColor,
               borderRadius: BorderRadius.circular(4.5.r),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h)
+                .copyWith(bottom: 3),
             child: Text(
               'Group ID:- ${_getbooking['group_id']}',
               style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                fontSize: 12,
-              ),
+                  fontSize: 12.5.sp,
+                  color: appColor.blackThemeColor,
+                  fontWeight: FontWeight.w700),
             ),
           ),
           Spacer(),
@@ -260,8 +257,7 @@ class AssignedBookingCard extends StatelessWidget {
           ),
           4.horizontalSpace,
           AssignmentTimer(
-            createdAt: DateTime.now().toString(),
-            // AssignmentTimer(createdAt: _getbooking['created_at'].toString(),
+            createdAt: '${_getbooking['pickup_points'][0]['booking']['assign_time']??DateTime.now()}'.toString(),
             key: ValueKey('${_getbooking['group_id']}'),
           )
         ],

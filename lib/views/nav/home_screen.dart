@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                 cards: controller.getShiftRideCards,
                 aspectRatio: 1.55,
                 titleMaxLines: 1,
-                titleLetterSpacing: -0.4,
+                titleLetterSpacing: -0.7,
                 borderColor: appColor.greenThemeColor,
                 iconBgColor: const Color(0xffF9FFDF),
               ),
@@ -72,7 +72,7 @@ class HomeScreen extends StatelessWidget {
               // Support & Approval Cards
               _buildDashboardCards(
                 cards: controller.getSupportAndApprovalCards,
-                aspectRatio: 1.5,
+                aspectRatio: 1.6,
                 borderColor: appColor.blackThemeColor,
                 iconBgColor: const Color(0xff353535),
                 showPercentage: false,
@@ -98,7 +98,7 @@ class HomeScreen extends StatelessWidget {
     EdgeInsets? iconPadding,
     bool showPercentage = true,
     bool showSubtitle = true,
-    double mainAxisSpacing = 16,
+    double mainAxisSpacing = 15,
   }) {
     return Container(
       padding: EdgeInsets.all(12.sp),
@@ -118,7 +118,7 @@ class HomeScreen extends StatelessWidget {
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 10,
+          crossAxisSpacing: 9,
           mainAxisSpacing: mainAxisSpacing,
           childAspectRatio: aspectRatio,
         ),
@@ -139,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            padding: EdgeInsets.symmetric(horizontal: 11.w, vertical: 5.h)
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h)
                 .copyWith(right: 1.w, bottom: 2),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,8 +149,8 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      width: 30.h,
-                      height: 30.h,
+                      width: 35.sp,
+                      height: 35.sp,
                       padding: iconPadding ?? EdgeInsets.all(5.sp),
                       decoration: BoxDecoration(
                         color: iconBgColor ?? appColor.greenThemeColor,
@@ -168,25 +168,27 @@ class HomeScreen extends StatelessWidget {
                               ? Colors.white
                               : null),
                     ),
-                    SizedBox(width: 10.w),
+                    SizedBox(width: 12.w),
                     Expanded(
                       child: Text(
                         card.value,
                         style: TextStyle(
-                          fontSize: 20.sp,
+                          fontSize: 25.sp,
                           fontWeight: FontWeight.bold,
+                          color: appColor.blackThemeColor
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(),
+                SizedBox(height: 1,),
                 Text(
                   card.title,
                   style: TextStyle(
-                    fontSize: 14.sp,
+                    fontSize: 13.5.sp,
                     height: 1.2,
+                    fontWeight: FontWeight.w700,
                     letterSpacing: titleLetterSpacing,
                     color: appColor.blackThemeColor,
                   ),
@@ -199,21 +201,22 @@ class HomeScreen extends StatelessWidget {
                       Text(
                         "${card.percentage}%  ",
                         style: TextStyle(
-                            fontSize: 11.5.sp,
+                            fontSize: 11.sp,
                             letterSpacing: -0.3,
                             color: card.trend == "up"
                                 ? Colors.green
                                 : card.trend == "down"
                                 ? Colors.red
                                 : Colors.orange,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                       Expanded(
                         child: Text(card.subTitle,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 letterSpacing: -0.3,
-                                fontSize: 11.sp, color: Colors.grey.shade400)),
+                                fontSize: 10.sp, color: appColor.color6B6B6B)),
                       )
                     ],
                   )
@@ -235,7 +238,7 @@ class HomeScreen extends StatelessWidget {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 10,
-        childAspectRatio: 1.65,
+        childAspectRatio: 1.7,
       ),
       itemBuilder: (context, index) {
         final card = controller.getUserDriverCards[index];
@@ -251,7 +254,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 5.h)
+          padding: EdgeInsets.symmetric(horizontal: 11.w, vertical: 5.h)
               .copyWith(right: 4.w, bottom: 2),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -261,8 +264,8 @@ class HomeScreen extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    width: 30.h,
-                    height: 30.h,
+                    width: 35.sp,
+                    height: 35.sp,
                     padding: EdgeInsets.all(5.sp),
                     decoration: BoxDecoration(
                       color: appColor.greenThemeColor,
@@ -278,24 +281,27 @@ class HomeScreen extends StatelessWidget {
                     child: Image.asset(card.icon),
                   ),
                   // Icon(card.icon, size: 20.sp),
-                  SizedBox(width: 10.w),
+                  SizedBox(width: 12.w),
                   Expanded(
                     child: Text(
                       card.value,
                       style: TextStyle(
-                        fontSize: 20.sp,
+                        fontSize: 25.sp,
                         fontWeight: FontWeight.bold,
+                        color: appColor.blackThemeColor
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
               ),
-              SizedBox(),
+              SizedBox(height: 3.h,),
               Text(
                 card.title,
                 style: TextStyle(
                   fontSize: 14.sp,
+                  height: 1.2,
+                  fontWeight: FontWeight.w700,
                   color: appColor.blackThemeColor,
                 ),
                 maxLines: 1,
@@ -307,18 +313,21 @@ class HomeScreen extends StatelessWidget {
                     "${card.percentage}%  ",
                     style: TextStyle(
                         fontSize: 11.5.sp,
+                        letterSpacing: -0.3,
                         color: card.trend == "up"
                             ? Colors.green
                             : card.trend == "down"
-                                ? Colors.red
-                                : Colors.orange,
-                        fontWeight: FontWeight.bold),
+                            ? Colors.red
+                            : Colors.orange,
+                        fontWeight: FontWeight.bold
+                    ),
                   ),
                   Expanded(
                     child: Text(card.subTitle,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontSize: 11.sp, color: Colors.grey.shade400)),
+                            letterSpacing: -0.3,
+                            fontSize: 10.5.sp, color: appColor.color6B6B6B)),
                   )
                 ],
               )
@@ -340,10 +349,10 @@ class HomeScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.r),
             child: Image.asset(
               appIcon.admin,
-              height: 35.h,
+              height: 45.sp,
             ),
           ),
-          SizedBox(width: 12.w),
+          SizedBox(width: 10.w),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -352,17 +361,17 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   'Welcome !!',
                   style: TextStyle(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey.shade700,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
+                    color: appColor.color6B6B6B,
                   ),
                 ),
                 Text(
                   '$userName',
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: appColor.blackThemeColor,
                   ),
                 ),
               ],
@@ -416,7 +425,7 @@ class HomeScreen extends StatelessWidget {
             ),
             child: Image.asset(
               appIcon.notification,
-              height: 22.sp,
+              height: 25.sp,
             ),
           ),
         ),

@@ -19,9 +19,10 @@ class FundsManagementScreen extends StatelessWidget {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
           body: AppCustomTab(
+            fontSize: 12.sp,
             selectedLabelColor: appColor.blackThemeColor,
             unSelectedLabelColor: appColor.whiteThemeColor,
-            tabBackGroundColor: appColor.blackThemeColor,
+            tabBackGroundColor: appColor.color353535,
             indicatorSelectedColor: appColor.greenThemeColor,
             indicatorUnSelectedColor: Colors.transparent,
             tabTitles: [

@@ -21,7 +21,7 @@ class _InteracTransferScreenState extends State<InteracTransferScreen> {
 
   @override
   void initState() {
-    controller = Get.put(InteracTransferController(),permanent: false);
+    controller = Get.put(InteracTransferController(), permanent: false);
     super.initState();
   }
 
@@ -40,7 +40,8 @@ class _InteracTransferScreenState extends State<InteracTransferScreen> {
           _buildFilerSearchBar(context),
           Expanded(
             child: Obx(() {
-              if (controller.isLoading.value && controller.currentPage.value == 1) {
+              if (controller.isLoading.value &&
+                  controller.currentPage.value == 1) {
                 return BuildSmallLoader();
               }
 
@@ -51,12 +52,15 @@ class _InteracTransferScreenState extends State<InteracTransferScreen> {
                   child: ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [
-                      SizedBox(height: Get.height*0.6, child: Center(
-                        child: Text(
-                          "No Interac E-Transfer found.",
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                      )),
+                      SizedBox(
+                          height: Get.height * 0.6,
+                          child: Center(
+                            child: Text(
+                              "No Interac E-Transfer found.",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
+                            ),
+                          )),
                     ],
                   ),
                 );
@@ -67,7 +71,8 @@ class _InteracTransferScreenState extends State<InteracTransferScreen> {
                 color: appColor.blackThemeColor,
                 child: ListView.builder(
                   physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.only(bottom: (!controller.hasMoreData.value)?12.h:32.h),
+                  padding: EdgeInsets.only(
+                      bottom: (!controller.hasMoreData.value) ? 12.h : 32.h),
                   controller: controller.scrollController,
                   itemCount: controller.interacTransferData.length + 1,
                   itemBuilder: (context, index) {
@@ -100,6 +105,7 @@ class _InteracTransferScreenState extends State<InteracTransferScreen> {
       ),
     );
   }
+
   Widget _buildFilerSearchBar(context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
@@ -108,16 +114,20 @@ class _InteracTransferScreenState extends State<InteracTransferScreen> {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              height: 38.h,
+              height: 35.h,
               decoration: BoxDecoration(
                 color: appColor.whiteThemeColor,
                 border:
                     Border.all(color: appColor.greyDarkThemeColor, width: 1),
-                borderRadius: BorderRadius.circular(11.r),
+                borderRadius: BorderRadius.circular(10.r),
               ),
               child: Row(
                 children: [
-                  const Icon(CupertinoIcons.search, color: Colors.black54),
+                  Image.asset(
+                    'assets/icons/home/search.png',
+                    width: 22.sp,
+                    height: 22.sp,
+                  ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: TextField(
@@ -130,17 +140,17 @@ class _InteracTransferScreenState extends State<InteracTransferScreen> {
                         controller.currentPage.value = 1;
                         controller.getIntracTransfer();
                       },
-                      style: const TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 14.sp),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 10),
           Container(
-            height: 38.h,
-            width: 38.h,
+            height: 35.h,
+            width: 35.h,
             decoration: BoxDecoration(
               color: appColor.whiteThemeColor,
               border: Border.all(color: appColor.greyDarkThemeColor, width: 1),

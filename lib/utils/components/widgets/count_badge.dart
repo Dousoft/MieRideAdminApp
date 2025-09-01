@@ -11,7 +11,7 @@ class CountBadge extends StatelessWidget {
     if (int.parse(count.toString()) == 0) return const SizedBox.shrink();
 
     return Container(
-      padding: EdgeInsets.all(5.sp).copyWith(bottom:4.sp),
+      padding: EdgeInsets.all(4.sp).copyWith(bottom:1.sp),
       decoration: BoxDecoration(
         color: Colors.red,
         shape: BoxShape.circle

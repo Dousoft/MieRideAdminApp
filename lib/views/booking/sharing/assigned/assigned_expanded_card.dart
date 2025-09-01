@@ -1,15 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mie_admin/views/booking/sharing/manual/manual_expanded_card.dart';
 
 import '../../../../utils/constants.dart';
 
-class AcceptedExpandedCard extends StatelessWidget {
+class AssignedExpandedCard extends StatelessWidget {
   final Map item;
-  const AcceptedExpandedCard({super.key, required this.item});
+  const AssignedExpandedCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -163,8 +164,8 @@ class _AssignmentTimerState extends State<AssignmentTimer> {
   void initState() {
     super.initState();
     try {
-      createdAt = DateTime.parse(widget.createdAt).toLocal();
-      expiryTime = createdAt.add(const Duration(minutes: 5));
+      createdAt = DateTime.parse(widget.createdAt);
+      expiryTime = createdAt.add(const Duration(minutes: 2));
       _startTimer();
     } catch (e) {
       remaining = Duration.zero;
@@ -210,10 +211,13 @@ class _AssignmentTimerState extends State<AssignmentTimer> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      remaining > Duration.zero ? formatDuration(remaining) : "Expired",
-      style: TextStyle(
-          fontSize: 15.sp, fontWeight: FontWeight.bold, color: Colors.white),
+    return Padding(
+      padding: EdgeInsets.only(top: 3.h),
+      child: Text(
+        remaining > Duration.zero ? formatDuration(remaining) : "Expired",
+        style: TextStyle(
+            fontSize: 15.sp, fontWeight: FontWeight.bold, color: Colors.white),
+      ),
     );
   }
 }

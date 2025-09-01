@@ -53,7 +53,7 @@ class _AppLeftIconButtonState extends State<AppLeftIconButton> {
       onTap: isProcessing ? null : _handleTap,
       child: Container(
         padding: EdgeInsets.symmetric(
-            horizontal: 2.w, vertical: widget.paddingVertical??4.h),
+            horizontal: 2.w, vertical: widget.paddingVertical??3.h),
         decoration: BoxDecoration(
           color: widget.backgroundColor,
           borderRadius: widget.borderRadius??BorderRadius.circular(5.r),
@@ -64,14 +64,20 @@ class _AppLeftIconButtonState extends State<AppLeftIconButton> {
           children: [
             widget.icon,
             8.horizontalSpace,
-            Text(
-              isProcessing
-                  ? widget.processingText ?? 'Processing...'
-                  : widget.btnText,
-              style: TextStyle(
-                fontSize: widget.fontSize ?? 12.5.sp,
-                color: widget.textColor,
-              ),
+            Column(
+              children: [
+                3.verticalSpace,
+                Text(
+                  isProcessing
+                      ? widget.processingText ?? 'Processing...'
+                      : widget.btnText,
+                  style: TextStyle(
+                    fontSize: widget.fontSize ?? 12.sp,
+                    fontWeight: FontWeight.w400,
+                    color: widget.textColor,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

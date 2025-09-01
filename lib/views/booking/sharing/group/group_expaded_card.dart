@@ -130,10 +130,10 @@ class GroupExpendedCard extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: appColor.blackThemeColor,
+            color: appColor.color353535,
             borderRadius: BorderRadius.circular(5.r),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.5.h).copyWith(bottom: 1),
           child: Text(
             'Booking ID :- $bookingId',
             style: TextStyle(
@@ -143,7 +143,7 @@ class GroupExpendedCard extends StatelessWidget {
           ),
         ),
         Text(
-          bookingDate.toMonthYearTimeFormat(),
+          bookingDate.toFormattedDate(),
           style: TextStyle(fontSize: 12.sp, color: Colors.grey),
         ),
       ],
@@ -156,11 +156,11 @@ class GroupExpendedCard extends StatelessWidget {
         children: [
           TextSpan(
             text: label,
-            style: TextStyle(fontSize: 12.sp, color: Colors.black),
+            style: TextStyle(fontSize: 12.sp, color: appColor.blackThemeColor),
           ),
           TextSpan(
             text: value,
-            style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+            style: TextStyle(fontSize: 12.sp, color: appColor.color6B6B6B),
           ),
         ],
       ),

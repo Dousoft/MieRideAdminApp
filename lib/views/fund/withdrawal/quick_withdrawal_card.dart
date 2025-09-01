@@ -123,7 +123,7 @@ class QuickWithdrawalCard extends StatelessWidget {
             child: Column(
               children: [
                 _statusButton(context),
-                10.verticalSpace,
+                8.verticalSpace,
                 PopupMenuButton<int>(
                   onSelected: (value) async {
                     isUpdating.value = true;
@@ -144,15 +144,15 @@ class QuickWithdrawalCard extends StatelessWidget {
                     ),
                   ],
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(5.r),
                   ),
                   offset: const Offset(0, 30),
                   child: Container(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h).copyWith(bottom: 6.h),
                     decoration: BoxDecoration(
                       color: Colors.black,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(5.r),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -188,14 +188,17 @@ class QuickWithdrawalCard extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(fontSize: 13.sp, color: Colors.black),
+          style: TextStyle(fontSize: 12.3.sp, color: appColor.blackThemeColor),
         ),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 13.sp,
-            color: Colors.grey.shade600,
-            fontWeight: boldValue ? FontWeight.bold : FontWeight.normal,
+        Expanded(
+          child: Text(
+            value,
+            style: TextStyle(
+              fontSize: 12.5.sp,
+              color: appColor.color6B6B6B,
+              fontWeight: boldValue? FontWeight.w700 : FontWeight.w400,
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
@@ -206,7 +209,7 @@ class QuickWithdrawalCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(11.sp),
       decoration: BoxDecoration(
-        color: appColor.blackThemeColor,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(12.r),
         ),
@@ -219,15 +222,22 @@ class QuickWithdrawalCard extends StatelessWidget {
               color: appColor.greenThemeColor,
               borderRadius: BorderRadius.circular(4.5.r),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h)
+                .copyWith(bottom: 2.h),
             child: Text(
               "Driver ID :- ${user?['id'] ?? 'N/A'}",
-              style: TextStyle(fontSize: 13.sp, color: Colors.black),
+              style: TextStyle(
+                  fontSize: 13.sp,
+                  color: appColor.blackThemeColor,
+                  fontWeight: FontWeight.w700),
             ),
           ),
           Text(formattedDate,
               style:
-                  TextStyle(fontSize: 12.sp, color: appColor.greenThemeColor)),
+                  TextStyle(
+                      fontSize: 11.sp,
+                      color: appColor.greenThemeColor,
+                      fontWeight: FontWeight.w700)),
         ],
       ),
     );
@@ -236,6 +246,7 @@ class QuickWithdrawalCard extends StatelessWidget {
   Widget _statusButton(context) {
     return AppButton(
       btnText: "Account Info",
+      borderRadius: BorderRadius.circular(5.r),
       onPressed: () {
         showDialog(
             context: context,
@@ -248,7 +259,7 @@ class QuickWithdrawalCard extends StatelessWidget {
             });
       },
       backgroundColor: Color(0xff00A431),
-      paddingVertical: 6.h,
+      paddingVertical: 7.h,
     );
   }
 }

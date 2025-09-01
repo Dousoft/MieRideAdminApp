@@ -51,7 +51,7 @@ class AcceptedBookingCard extends StatelessWidget {
     return Container(
         padding: EdgeInsets.all(10.sp),
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: appColor.color353535,
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(12.r),
           ),
@@ -123,7 +123,7 @@ class AcceptedBookingCard extends StatelessWidget {
         btnText: label,
         onPressed: onPressed,
         processingText: processingText,
-        paddingVertical: 6.h,
+        paddingVertical: 8.h,
       ),
     );
   }
@@ -290,16 +290,17 @@ class AcceptedBookingCard extends StatelessWidget {
               children: [
                 Container(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 1.h),
+                      EdgeInsets.symmetric(horizontal: 14.w, vertical: 3.h).copyWith(bottom: 1.h),
                   decoration: BoxDecoration(
                     color: Colors.black87,
-                    borderRadius: BorderRadius.circular(6.r),
+                    borderRadius: BorderRadius.circular(4.r),
                   ),
                   child: Text(
                     "ID :- ${driverDetails['id']}",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 10.sp,
                     ),
                   ),
                 ),
@@ -346,9 +347,9 @@ class AcceptedBookingCard extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 7.h),
+                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8.h).copyWith(bottom: 5.h),
                   decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: appColor.color353535,
                     borderRadius: BorderRadius.circular(4.r),
                   ),
                   alignment: Alignment.center,
@@ -374,12 +375,10 @@ class AcceptedBookingCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: TextStyle(fontSize: 13.5.sp)),
+          Text(label, style: TextStyle(fontSize: 13.2.sp,fontWeight: FontWeight.w400, color: appColor.blackThemeColor)),
           Text(
             value,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w700,color: appColor.blackThemeColor),
           ),
         ],
       ),
@@ -390,7 +389,7 @@ class AcceptedBookingCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(11.sp),
       decoration: BoxDecoration(
-        color: appColor.blackThemeColor,
+        color: appColor.color353535,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(12.r),
         ),
@@ -403,14 +402,14 @@ class AcceptedBookingCard extends StatelessWidget {
               color: appColor.greenThemeColor,
               borderRadius: BorderRadius.circular(4.5.r),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h)
+                .copyWith(bottom: 2.h),
             child: Text(
               'Group ID:- ${_getbooking['group_id']}',
               style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                fontSize: 12,
-              ),
+                  fontSize: 12.5.sp,
+                  color: appColor.blackThemeColor,
+                  fontWeight: FontWeight.w700),
             ),
           ),
         ],

@@ -49,6 +49,7 @@ dependencies:
   pdf: ^3.11.3
   open_file: ^3.5.10
   path_provider: ^2.1.5
+  timezone: ^0.10.1
 
 dev_dependencies:
   flutter_test:
@@ -94,18 +95,20 @@ flutter:
   # example:
 
   fonts:
-    - family: PowerGrotesk
-      fonts:
-        - asset: assets/fonts/PowerGrotesk-Regular.otf
-    - family: Inter
-      fonts:
-        - asset: assets/fonts/Inter-font.ttf
     - family: Nexa
       fonts:
-        - asset: assets/fonts/Nexa-font.otf
-    - family: NexaBold
-      fonts:
-        - asset: assets/fonts/NexaDemo-Bold.ttf
+        - asset: assets/fonts/NexaBook.otf
+          weight: 300   # Regular
+        - asset: assets/fonts/NexaRegular.otf
+          weight: 400   # Regular
+        - asset: assets/fonts/NexaBold.otf
+          weight: 500   # Normal
+        - asset: assets/fonts/NexaXBold.otf
+          weight: 600   # Bold
+        - asset: assets/fonts/NexaHeavy.otf
+          weight: 700   # Bold
+        - asset: assets/fonts/NexaBlack.otf
+          weight: 900   # Bold
 
   #
   # For details regarding fonts from package dependencies,

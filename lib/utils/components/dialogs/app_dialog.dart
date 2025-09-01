@@ -38,7 +38,7 @@ class AppDialog extends StatelessWidget {
             ),
             25.verticalSpace,
             Container(
-              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
+              padding: EdgeInsets.symmetric(vertical: 9.h, horizontal: 12.w).copyWith(bottom: 8),
               margin: EdgeInsets.symmetric(horizontal: 8.w),
               decoration: BoxDecoration(
                 color: appColor.greyThemeColor,
