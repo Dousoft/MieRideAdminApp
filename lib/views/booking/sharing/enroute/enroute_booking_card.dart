@@ -152,6 +152,7 @@ class EnrouteBookingCard extends StatelessWidget {
               color: appColor.blackThemeColor,
               borderRadius: BorderRadius.circular(10.r),
             ),
+            alignment: Alignment.center,
             padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h)
                 .copyWith(bottom: 8.h),
             child: Text(
@@ -196,8 +197,8 @@ class EnrouteBookingCard extends StatelessWidget {
   }
 
   Widget _buildDriverDetails() {
-    final driverDetails = booking['driverDetails'] ?? {};
-    return Container(
+    Map driverDetails = booking['driverDetails'] ?? {};
+    return driverDetails.isNotEmpty?Container(
       margin: EdgeInsets.only(top: 2.h, bottom: 8.h),
       child: Row(
         children: [
@@ -301,7 +302,7 @@ class EnrouteBookingCard extends StatelessWidget {
               spacing: 5.h,
               children: [
                 Text(
-                  '${driverDetails['vehicle_name']} (${driverDetails['vehicle_colour']})',
+                  '${driverDetails['vehicle_brand']} (${driverDetails['vehicle_colour']})',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(
@@ -332,7 +333,7 @@ class EnrouteBookingCard extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ):SizedBox();
   }
 
   Widget _infoColumn(String label, String value) {

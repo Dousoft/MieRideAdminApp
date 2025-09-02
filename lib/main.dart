@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mie_admin/repo/ably_services.dart';
 import 'package:mie_admin/utils/constants.dart';
-import 'package:mie_admin/views/root.dart';
 import 'package:mie_admin/views/splash_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:timezone/data/latest.dart' as tz;

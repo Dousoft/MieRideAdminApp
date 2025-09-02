@@ -48,6 +48,9 @@ class AppIcon {
   // mie
   String mie = 'assets/icons/home/booking/mie.png';
 
+  // mie
+  String date = 'assets/icons/home/date.png';
+
   //
 
 

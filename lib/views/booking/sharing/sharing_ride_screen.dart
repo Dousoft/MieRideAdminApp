@@ -56,6 +56,7 @@ class SharingRideScreen extends StatelessWidget {
           count['booking_completed']??0,
           count['booking_canceled']??0,
         ],
+        initialIndex: 2,
         tabViews: [
           ComingSoon(),
           GroupScreen(groupType: 'upcoming',),

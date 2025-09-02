@@ -75,7 +75,7 @@ class CompletedBookingCard extends StatelessWidget {
                 ),
                 Text(
                   '${booking["first_pickup_date"]} ${booking["first_pickup_time"]}'
-                      .toMonthYearTimeFormat(),
+                      .toDateMonthYearTimeFormat(),
                   style: TextStyle(
                     fontSize: 11.sp,
                     fontWeight: FontWeight.bold,

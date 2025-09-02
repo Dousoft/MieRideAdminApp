@@ -90,8 +90,7 @@ class ShowTimeConfirmationDialog extends StatelessWidget {
                             onChanged: (val) {
                               isKeepSame.value = val!;
                             },
-                            materialTapTargetSize: MaterialTapTargetSize
-                                .shrinkWrap, // remove extra space
+                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             visualDensity: VisualDensity(
                               horizontal: VisualDensity.compact.horizontal,
                               vertical: VisualDensity.compact.vertical,

@@ -60,7 +60,7 @@ class LoginScreen extends StatelessWidget {
                     ],
                   ),
                   child: Image.asset(
-                    'assets/icons/img.png',
+                    'assets/icons/myride.png',
                     height: Get.height * 0.23,
                   ),
                 ),

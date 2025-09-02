@@ -83,7 +83,7 @@ class WeeklyWithdrawalCard extends StatelessWidget {
                         style: TextStyle(fontSize: 11.5.sp, color: appColor.blackThemeColor),
                       ),
                       Text(
-                        "\$${double.parse(weeklyWithdrawal['total_payable_amount']).toStringAsFixed(2)}",
+                        "\$${double.parse(weeklyWithdrawal['total_payable_till_last_sunday']??0.toString()).toStringAsFixed(2)}",
                         style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.bold,

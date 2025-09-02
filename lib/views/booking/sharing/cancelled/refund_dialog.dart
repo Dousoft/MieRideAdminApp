@@ -102,7 +102,7 @@ class RefundDialog extends StatelessWidget {
               onChanged: setRefundAmount,
               decoration: InputDecoration(
                 hintText: "Enter Refund Amount",
-                hintStyle: TextStyle(color: Colors.grey.shade600),
+                hintStyle: TextStyle(color: Colors.grey.shade600,fontSize: 13.sp),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.r),
                     borderSide:
@@ -117,6 +117,7 @@ class RefundDialog extends StatelessWidget {
                   value: refundReason.value.isEmpty ? null : refundReason.value,
                   decoration: InputDecoration(
                     hintText: "Select Refund Reason",
+                    hintStyle: TextStyle(fontSize: 13.sp),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.r),
                         borderSide: BorderSide(
@@ -128,7 +129,7 @@ class RefundDialog extends StatelessWidget {
                       .map(
                         (reason) => DropdownMenuItem(
                           value: reason,
-                          child: Text(reason),
+                          child: Text(reason,style: TextStyle(fontSize: 13.sp),),
                         ),
                       )
                       .toList(),

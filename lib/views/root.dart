@@ -72,12 +72,13 @@ class _RootState extends State<Root> {
                   index: 1,
                 ),
                 buildBottomIcon(
-                  imageSrc: appIcon.booking,
+                  imageSrc: appIcon.mie,
                   text: "MIE RIDES",
                   index: 2,
                   height: 50.h,
                   width: 50.h,
                   flex: 5,
+                    iconPadding:9.sp,
                   count: _controller.notificationData['totalBookingNotifications']??0
                 ),
                 buildBottomIcon(
@@ -125,7 +126,7 @@ class _RootState extends State<Root> {
                   height: height ?? 40.h,
                   width: width ?? 40.h,
                   decoration: BoxDecoration(
-                    borderRadius: 14.borderRadius,
+                    borderRadius: 12.borderRadius,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black26,
