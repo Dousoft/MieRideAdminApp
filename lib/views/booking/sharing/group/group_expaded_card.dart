@@ -117,7 +117,7 @@ class GroupExpendedCard extends StatelessWidget {
           ),
           SizedBox(height: 3.h),
           _buildInfoRow('Booking Placed :-  ',
-              bookingPlaced.toString().toMonthYearTimeFormat()),
+              bookingPlaced.toString().toDateMonthYearTimeFormat()),
         ],
       ),
     );
@@ -143,8 +143,8 @@ class GroupExpendedCard extends StatelessWidget {
           ),
         ),
         Text(
-          bookingDate.toFormattedDate(),
-          style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+          '$bookingDate $bookingTime'.toDateMonthYearTimeFormat(),
+          style: TextStyle(fontSize: 10.sp, color: appColor.color6B6B6B,fontWeight: FontWeight.w400),
         ),
       ],
     );

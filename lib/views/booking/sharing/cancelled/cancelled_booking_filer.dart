@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mie_admin/controllers/booking/sharing/cancelled_controller.dart';
 import 'package:mie_admin/utils/constants.dart';
-import '../../../controllers/fund/interac_transfer_controller.dart';
 
-class InteracTransferFiler extends StatelessWidget {
-  final InteracTransferController controller =
-      Get.find<InteracTransferController>();
+class CancelledBookingFiler extends StatelessWidget {
+  final CancelledController controller = Get.find<CancelledController>();
+
+  CancelledBookingFiler({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,8 @@ class InteracTransferFiler extends StatelessWidget {
                             ],
                           )),
                     ),
-                    _footer()
+                    _footer(),
+                    4.verticalSpace
                   ],
                 ),
               ),
@@ -90,6 +92,7 @@ class InteracTransferFiler extends StatelessWidget {
           12.verticalSpace,
           _sidebarItem('Date'),
           _sidebarItem('Status'),
+          _sidebarItem('Cancelled by'),
         ],
       ),
     );
@@ -100,14 +103,16 @@ class InteracTransferFiler extends StatelessWidget {
           onTap: () => controller.selectedTab.value = title,
           child: Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 8.h).copyWith(left: 16.w),
+            padding: EdgeInsets.symmetric(vertical: 8.h)
+                .copyWith(left: 16.w, bottom: 7),
             decoration: BoxDecoration(
               color: controller.selectedTab.value == title
-                  ? Colors.grey.shade300
-                  : Colors.grey.shade100,
+                  ? appColor.greyDarkThemeColor
+                  : appColor.greyThemeColor,
             ),
             alignment: Alignment.centerLeft,
-            child: Text(title, style: TextStyle(fontSize: 14.sp)),
+            child: Text(title,
+                style: TextStyle(fontSize: 13.sp, letterSpacing: -0.3)),
           ),
         ));
   }
@@ -116,6 +121,8 @@ class InteracTransferFiler extends StatelessWidget {
     switch (controller.selectedTab.value) {
       case 'Status':
         return _statusFilter();
+      case 'Cancelled by':
+        return _cancelledByFilter();
       case 'Date':
       default:
         return _dateFilter();
@@ -139,7 +146,7 @@ class InteracTransferFiler extends StatelessWidget {
               child: _dateBox(controller.startDate.value),
             )),
         SizedBox(height: 8.h),
-        Text("To", style: TextStyle(fontSize: 12.sp, color: Colors.black)),
+        Text("To", style: TextStyle(fontSize: 14.sp, color: Colors.black,fontWeight: FontWeight.bold)),
         SizedBox(height: 8.h),
         Obx(() => InkWell(
               onTap: () async {
@@ -204,9 +211,8 @@ class InteracTransferFiler extends StatelessWidget {
         SizedBox(height: 8.h),
         Obx(() {
           final statusMap = {
-            'Accepted': 1,
-            'New Request': 0,
-            'Rejected': -1,
+            'Refund': 'refund',
+            'Refund Issued': 'refunded',
           };
 
           final filtered = statusMap.keys
@@ -214,7 +220,6 @@ class InteracTransferFiler extends StatelessWidget {
                   .toLowerCase()
                   .contains(controller.searchStatus.value.toLowerCase()))
               .toList();
-
 
           return Column(
             children: filtered.map((status) {
@@ -234,7 +239,83 @@ class InteracTransferFiler extends StatelessWidget {
                       },
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       visualDensity:
-                      const VisualDensity(horizontal: -4, vertical: -4),
+                          const VisualDensity(horizontal: -4, vertical: -4),
+                      checkColor: appColor.whiteThemeColor,
+                      activeColor: appColor.blackThemeColor,
+                    ),
+                    SizedBox(width: 6.w),
+                    Text(
+                      status,
+                      style: TextStyle(fontSize: 12.sp),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          );
+        })
+      ],
+    );
+  }
+
+  Widget _cancelledByFilter() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        12.verticalSpace,
+        TextField(
+          onChanged: (value) =>
+              controller.searchCancelledByFilter.value = value,
+          decoration: InputDecoration(
+            hintText: "Search...",
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 12.w, vertical: 7.h),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.r),
+                borderSide: BorderSide(color: appColor.blackThemeColor)),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.r),
+                borderSide: BorderSide(color: appColor.blackThemeColor)),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.r),
+                borderSide: BorderSide(color: appColor.blackThemeColor)),
+            isDense: true,
+          ),
+        ),
+        SizedBox(height: 8.h),
+        Obx(() {
+          final cancelledByMap = {
+            'User': 'user',
+            'Admin': 'admin',
+            'Auto': 'automation',
+            'Driver': 'driver'
+          };
+
+          final filtered = cancelledByMap.keys
+              .where((e) => e.toLowerCase().contains(
+                  controller.searchCancelledByFilter.value.toLowerCase()))
+              .toList();
+
+          return Column(
+            children: filtered.map((status) {
+              return SizedBox(
+                height: 25.h,
+                child: Row(
+                  children: [
+                    Checkbox(
+                      value: controller.selectedCancelledByValue.value ==
+                          cancelledByMap[status],
+                      onChanged: (checked) {
+                        if (checked == true) {
+                          controller.selectedCancelledByValue.value =
+                              cancelledByMap[status];
+                        } else {
+                          controller.selectedCancelledByValue.value = null;
+                        }
+                      },
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      visualDensity:
+                          const VisualDensity(horizontal: -4, vertical: -4),
                       checkColor: appColor.whiteThemeColor,
                       activeColor: appColor.blackThemeColor,
                     ),

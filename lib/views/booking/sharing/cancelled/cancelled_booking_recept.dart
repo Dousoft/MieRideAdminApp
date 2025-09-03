@@ -21,11 +21,11 @@ class CancelReceiptDialog extends StatelessWidget {
     final userName =
         '${booking["user_details"]?["first_name"]} ${booking["user_details"]?["last_name"]}';
     final bookingDate = '${booking["booking_date"]} ${booking["booking_time"]}'
-        .toMonthYearTimeFormat();
-    final bookingCreateAt = '${booking["created_at"]}'.toMonthYearTimeFormat();
+        .toDateMonthYearTimeFormat();
+    final bookingCreateAt = '${booking["created_at"]}'.toDateMonthYearTimeFormat();
     final pickupAddress = booking["source"] ?? "";
     final dropAddress = booking["destination"] ?? "";
-    final cancelledAt = '${booking['cancel_time']}'.toMonthYearTimeFormat();
+    final cancelledAt = '${booking['cancel_time']}'.toDateMonthYearTimeFormat();
     final cancelReason = booking["reason"] ?? "";
     final userRefund = booking["refund_amount"]?.toString() ?? "0";
     final adminEarned = booking["admin_commission"]?.toString() ?? "0";
@@ -347,11 +347,11 @@ class CancelReceiptDialog extends StatelessWidget {
     final cancelledBy = booking["cancel_by"] ?? "";
     final userName = booking["user_details"]?["first_name"] ?? "";
     final bookingDate = '${booking["booking_date"]} ${booking["booking_time"]}'
-        .toMonthYearTimeFormat();
-    final bookingCreateAt = '${booking["created_at"]}'.toMonthYearTimeFormat();
+        .toDateMonthYearTimeFormat();
+    final bookingCreateAt = '${booking["created_at"]}'.toDateMonthYearTimeFormat();
     final pickupAddress = booking["source"] ?? "";
     final dropAddress = booking["destination"] ?? "";
-    final cancelledAt = '${booking['cancel_time']}'.toMonthYearTimeFormat();
+    final cancelledAt = '${booking['cancel_time']}'.toDateMonthYearTimeFormat();
     final cancelReason = booking["reason"] ?? "";
     final userRefund = booking["refund_amount"]?.toString() ?? "0";
     final adminEarned = booking["admin_commission"]?.toString() ?? "0";

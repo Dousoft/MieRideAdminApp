@@ -105,10 +105,21 @@ extension StringDateFormatting on String {
     }
   }
 
-  String toMonthYearTimeFormat() {
+  String toDateMonthYearTimeFormat() {
     try {
       DateTime dateTime = DateTime.parse(this);
       final monthYear = DateFormat('dd MMM, yyyy').format(dateTime);
+      final time = DateFormat('hh:mm a').format(dateTime);
+      return '$monthYear ($time)';
+    } catch (e) {
+      return this; // fallback if parsing fails
+    }
+  }
+
+  String toMonthYearTimeFormat() {
+    try {
+      DateTime dateTime = DateTime.parse(this);
+      final monthYear = DateFormat('MMM, yyyy').format(dateTime);
       final time = DateFormat('hh:mm a').format(dateTime);
       return '$monthYear ($time)';
     } catch (e) {

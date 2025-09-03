@@ -170,7 +170,8 @@ class SwitchFiler extends StatelessWidget {
                   ? "Select date"
                   : date.toLocal().toString().split(' ')[0],
               style: TextStyle(fontSize: 12.sp)),
-          const Icon(Icons.calendar_today_outlined, size: 18),
+          Image.asset(appIcon.date,width: 14.h,height: 14.h,)
+          // const Icon(Icons.calendar_today_outlined, size: 18),
         ],
       ),
     );
@@ -213,10 +214,14 @@ class SwitchFiler extends StatelessWidget {
                   .contains(controller.searchStatus.value.toLowerCase()))
               .toList();
 
+
           return Column(
-            children: filtered
-                .map((status) => CheckboxListTile(
-                      title: Text(status, style: TextStyle(fontSize: 12.sp)),
+            children: filtered.map((status) {
+              return SizedBox(
+                height: 25.h,
+                child: Row(
+                  children: [
+                    Checkbox(
                       value: controller.selectedStatusValue.value ==
                           statusMap[status],
                       onChanged: (checked) {
@@ -226,13 +231,21 @@ class SwitchFiler extends StatelessWidget {
                           controller.selectStatus(null);
                         }
                       },
-                      dense: true,
-                      contentPadding: EdgeInsets.all(0),
-              checkColor: appColor.whiteThemeColor,
-              activeColor: appColor.blackThemeColor,
-                      controlAffinity: ListTileControlAffinity.leading,
-                    ))
-                .toList(),
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      visualDensity:
+                      const VisualDensity(horizontal: -4, vertical: -4),
+                      checkColor: appColor.whiteThemeColor,
+                      activeColor: appColor.blackThemeColor,
+                    ),
+                    SizedBox(width: 6.w),
+                    Text(
+                      status,
+                      style: TextStyle(fontSize: 12.sp),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
           );
         })
       ],

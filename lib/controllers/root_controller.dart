@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import '../utils/constants.dart';
 
 class RootController extends GetxController {
-  var selectedIndex = 0.obs;
+  var selectedIndex = 2.obs;
 
   void changeTab(int index) {
     selectedIndex.value = index;

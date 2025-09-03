@@ -16,22 +16,25 @@ class AppCustomTab extends StatefulWidget {
   final Color selectedLabelColor;
   final Color unSelectedLabelColor;
   final ValueChanged<int>? onTabChange;
+  final int initialIndex;
 
-  const AppCustomTab(
-      {super.key,
-      required this.tabTitles,
-      this.tabCounts,
-      this.fontSize,
-      this.contentPadding,
-      required this.tabViews,
-      required this.decoratedBoxRadius,
-      required this.indicatorRadius,
-      required this.indicatorSelectedColor,
-      required this.indicatorUnSelectedColor,
-      required this.tabBackGroundColor,
-      required this.selectedLabelColor,
-      required this.unSelectedLabelColor,
-      this.onTabChange});
+  const AppCustomTab({
+    super.key,
+    required this.tabTitles,
+    this.tabCounts,
+    this.fontSize,
+    this.contentPadding,
+    required this.tabViews,
+    required this.decoratedBoxRadius,
+    required this.indicatorRadius,
+    required this.indicatorSelectedColor,
+    required this.indicatorUnSelectedColor,
+    required this.tabBackGroundColor,
+    required this.selectedLabelColor,
+    required this.unSelectedLabelColor,
+    this.onTabChange,
+    this.initialIndex = 0,
+  });
 
   @override
   State<AppCustomTab> createState() => _AppCustomTabState();
@@ -40,13 +43,17 @@ class AppCustomTab extends StatefulWidget {
 class _AppCustomTabState extends State<AppCustomTab>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int selectedIndex = 0;
+  late int selectedIndex;
 
   @override
   void initState() {
     super.initState();
-    _tabController =
-        TabController(length: widget.tabTitles.length, vsync: this);
+    selectedIndex = widget.initialIndex;
+    _tabController = TabController(
+      length: widget.tabTitles.length,
+      vsync: this,
+      initialIndex: selectedIndex,
+    );
     _tabController.addListener(() {
       setState(() {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -119,14 +126,16 @@ class _AppCustomTabState extends State<AppCustomTab>
                       : widget.indicatorUnSelectedColor,
                   borderRadius: BorderRadius.circular(widget.indicatorRadius),
                 ),
-                padding: widget.contentPadding??EdgeInsets.symmetric(horizontal: 11.w, vertical: 5.h).copyWith(top: 6.5.h),
+                padding: widget.contentPadding ??
+                    EdgeInsets.symmetric(horizontal: 11.w, vertical: 5.h)
+                        .copyWith(top: 6.5.h),
                 child: Text(
                   title,
                   style: TextStyle(
                     color: isSelected
                         ? widget.selectedLabelColor
                         : widget.unSelectedLabelColor,
-                    fontSize: widget.fontSize??11.sp,
+                    fontSize: widget.fontSize ?? 11.sp,
                     letterSpacing: 0.2,
                     fontWeight: FontWeight.w700,
                   ),

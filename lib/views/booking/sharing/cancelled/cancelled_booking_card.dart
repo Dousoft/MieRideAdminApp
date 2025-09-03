@@ -48,7 +48,7 @@ class CancelledBookingCard extends StatelessWidget {
                       child: _buildInfoRow('Username :- ',
                           '${booking["user_details"]['first_name']} ${booking["user_details"]['last_name']}'),
                     ),
-                    Text('${booking["booking_date"]} ${booking['booking_time']}'.toMonthYearTimeFormat(),
+                    Text('${booking["booking_date"]} ${booking['booking_time']}'.toDateMonthYearTimeFormat(),
                       style: TextStyle(
                         fontSize: 11.sp,
                         color: appColor.color6B6B6B,

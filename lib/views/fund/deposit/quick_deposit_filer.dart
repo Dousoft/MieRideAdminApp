@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:mie_admin/controllers/fund/quick_deposit_controller.dart';
 import 'package:mie_admin/utils/constants.dart';
 
-import '../../../controllers/fund/interac_transfer_controller.dart';
 
 class InteracTransferFiler extends StatelessWidget {
   final QuickDepositController controller = Get.find<QuickDepositController>();
@@ -44,7 +42,8 @@ class InteracTransferFiler extends StatelessWidget {
                             ],
                           )),
                     ),
-                    _footer()
+                    _footer(),
+                    4.verticalSpace
                   ],
                 ),
               ),
@@ -100,19 +99,19 @@ class InteracTransferFiler extends StatelessWidget {
 
   Widget _sidebarItem(String title) {
     return Obx(() => InkWell(
-          onTap: () => controller.selectedTab.value = title,
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 8.h).copyWith(left: 16.w),
-            decoration: BoxDecoration(
-              color: controller.selectedTab.value == title
-                  ? Colors.grey.shade300
-                  : Colors.grey.shade100,
-            ),
-            alignment: Alignment.centerLeft,
-            child: Text(title, style: TextStyle(fontSize: 14.sp)),
-          ),
-        ));
+      onTap: () => controller.selectedTab.value = title,
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(vertical: 8.h).copyWith(left: 16.w,bottom: 7),
+        decoration: BoxDecoration(
+          color: controller.selectedTab.value == title
+              ? appColor.greyDarkThemeColor
+              : appColor.greyThemeColor,
+        ),
+        alignment: Alignment.centerLeft,
+        child: Text(title, style: TextStyle(fontSize: 13.sp,letterSpacing: -0.3)),
+      ),
+    ));
   }
 
   Widget _contentArea() {
@@ -176,7 +175,8 @@ class InteracTransferFiler extends StatelessWidget {
                   ? "Select date"
                   : date.toLocal().toString().split(' ')[0],
               style: TextStyle(fontSize: 12.sp)),
-          const Icon(Icons.calendar_today_outlined, size: 18),
+          Image.asset(appIcon.date,width: 14.h,height: 14.h,)
+          // const Icon(Icons.calendar_today_outlined, size: 18),
         ],
       ),
     );
@@ -220,28 +220,36 @@ class InteracTransferFiler extends StatelessWidget {
               .toList();
 
           return Column(
-            children: filtered
-                .map((status) => SizedBox(
-                      height: 25.h,
-                      child: CheckboxListTile(
-                        title: Text(status, style: TextStyle(fontSize: 12.sp)),
-                        value: controller.selectedStatusValue.value ==
-                            statusMap[status],
-                        onChanged: (checked) {
-                          if (checked == true) {
-                            controller.selectStatus(statusMap[status]);
-                          } else {
-                            controller.selectStatus(null);
-                          }
-                        },
-                        dense: true,
-                        contentPadding: EdgeInsets.all(0),
-                        checkColor: appColor.whiteThemeColor,
-                        activeColor: appColor.blackThemeColor,
-                        controlAffinity: ListTileControlAffinity.leading,
-                      ),
-                    ))
-                .toList(),
+            children: filtered.map((status) {
+              return SizedBox(
+                height: 25.h,
+                child: Row(
+                  children: [
+                    Checkbox(
+                      value: controller.selectedStatusValue.value ==
+                          statusMap[status],
+                      onChanged: (checked) {
+                        if (checked == true) {
+                          controller.selectStatus(statusMap[status]);
+                        } else {
+                          controller.selectStatus(null);
+                        }
+                      },
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      visualDensity:
+                      const VisualDensity(horizontal: -4, vertical: -4),
+                      checkColor: appColor.whiteThemeColor,
+                      activeColor: appColor.blackThemeColor,
+                    ),
+                    SizedBox(width: 6.w),
+                    Text(
+                      status,
+                      style: TextStyle(fontSize: 12.sp),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
           );
         })
       ],
@@ -286,28 +294,36 @@ class InteracTransferFiler extends StatelessWidget {
               .toList();
 
           return Column(
-            children: filtered
-                .map((status) => SizedBox(
-                      height: 25.h,
-                      child: CheckboxListTile(
-                        title: Text(status, style: TextStyle(fontSize: 12.sp)),
-                        value:
-                            controller.selectedPaymentTypeValue.value == paymentTypeMap[status],
-                        onChanged: (checked) {
-                          if (checked == true) {
-                            controller.selectedPaymentTypeValue.value = paymentTypeMap[status];
-                          } else {
-                            controller.selectedPaymentTypeValue.value = null;
-                          }
-                        },
-                        dense: true,
-                        contentPadding: EdgeInsets.all(0),
-                        checkColor: appColor.whiteThemeColor,
-                        activeColor: appColor.blackThemeColor,
-                        controlAffinity: ListTileControlAffinity.leading,
-                      ),
-                    ))
-                .toList(),
+            children: filtered.map((status) {
+              return SizedBox(
+                height: 25.h,
+                child: Row(
+                  children: [
+                    Checkbox(
+                      value:
+                      controller.selectedPaymentTypeValue.value == paymentTypeMap[status],
+                      onChanged: (checked) {
+                        if (checked == true) {
+                          controller.selectedPaymentTypeValue.value = paymentTypeMap[status];
+                        } else {
+                          controller.selectedPaymentTypeValue.value = null;
+                        }
+                      },
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      visualDensity:
+                      const VisualDensity(horizontal: -4, vertical: -4),
+                      checkColor: appColor.whiteThemeColor,
+                      activeColor: appColor.blackThemeColor,
+                    ),
+                    SizedBox(width: 6.w),
+                    Text(
+                      status,
+                      style: TextStyle(fontSize: 12.sp),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
           );
         })
       ],
