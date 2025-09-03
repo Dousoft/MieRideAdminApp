@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -244,11 +245,20 @@ class InteracTransferCard extends StatelessWidget {
                           Expanded(
                             child: PopupMenuButton<int>(
                               onSelected: (value) async {
+                                String? reason;
+
+                                if (value == -1) {
+                                  reason = await showRejectionDialog();
+                                  if (reason == null) return;
+                                }
+
                                 isUpdating.value = true;
                                 await controller.updateIntracTransferStatus(
-                                    index: index,
-                                    intracId: transaction['id'].toString(),
-                                    status: value.toString());
+                                  index: index,
+                                  intracId: transaction['id'].toString(),
+                                  status: value.toString(),
+                                  reason: reason,
+                                );
                                 isUpdating.value = false;
                               },
                               itemBuilder: (context) => [
@@ -344,6 +354,112 @@ class InteracTransferCard extends StatelessWidget {
       onPressed: () {},
       backgroundColor: color,
       paddingVertical: 6.h,
+    );
+  }
+
+  Future<String?> showRejectionDialog() async {
+    final RxString selectedReason = ''.obs;
+
+    return await Get.dialog<String>(
+      Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        backgroundColor: appColor.whiteThemeColor,
+        child: Padding(
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Title
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "User Interac",
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => Get.back(result: null), // ❌ cancelled
+                    child: Icon(Icons.close, size: 20.sp),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12.h),
+
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Select reason for rejection?",
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              SizedBox(height: 16.h),
+
+              // Dropdown
+              Obx(
+                    () => Container(
+                  height: 35.h,
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    icon: Icon(CupertinoIcons.chevron_down, size: 16),
+                    value: selectedReason.value.isEmpty
+                        ? null
+                        : selectedReason.value,
+                    underline: const SizedBox(),
+                    hint: Text("Select", style: TextStyle(fontSize: 14.sp)),
+                    items: [
+                      "Incorrect Transfer Amount",
+                      "Amount Not Received",
+                      "Screenshot is not clear"
+                    ].map((reason) {
+                      return DropdownMenuItem<String>(
+                        value: reason,
+                        child: Text(reason, style: TextStyle(fontSize: 14.sp)),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      if (value != null) {
+                        selectedReason.value = value;
+                      }
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(height: 30.h),
+
+              // Submit Button
+              SizedBox(
+                width: double.infinity,
+                child: AppButton(
+                  btnText: 'Submit',
+                  onPressed: () {
+                    if (selectedReason.value.isEmpty) {
+                      EasyLoading.showToast("Please select a reason");
+                    } else {
+                      Get.back(result: selectedReason.value); // ✅ return reason
+                    }
+                  },
+                  paddingVertical: 10.h,
+                  fontSize: 14.sp,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      barrierDismissible: false,
     );
   }
 }

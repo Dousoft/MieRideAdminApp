@@ -162,6 +162,7 @@ class ManualBookingCard extends StatelessWidget {
                                     insetPadding:
                                         EdgeInsets.symmetric(horizontal: 24.w),
                                     child: PaymentDetailsDialog(
+                                      tipAmount: _getRoute['tip_amount'].toString(),
                                       pMethod: _getRoute['payment_method']??'Via',
                                       person: '${_getRoute['number_of_people']??'1'}',
                                       bookingAmount:

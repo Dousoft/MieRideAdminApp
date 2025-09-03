@@ -10,7 +10,6 @@ import 'package:mie_admin/utils/extensions.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../utils/components/dialogs/payment_details_dialog.dart';
-import '../assign/assigned_driver_screen.dart';
 import '../manage/manage_screen.dart';
 import 'accepted_expanded_card.dart';
 
@@ -77,6 +76,7 @@ class AcceptedBookingCard extends StatelessWidget {
                         backgroundColor: Colors.transparent,
                         insetPadding: EdgeInsets.symmetric(horizontal: 24.w),
                         child: PaymentDetailsDialog(
+                          tipAmount: _getbooking['tip_amount'].toString(),
                           pMethod: _getbooking['payment_method'] ?? 'Via',
                           person: '${_getbooking['number_of_people'] ?? '1'}',
                           bookingAmount:
@@ -337,7 +337,7 @@ class AcceptedBookingCard extends StatelessWidget {
               spacing: 5.h,
               children: [
                 Text(
-                  '${driverDetails['vehicle_name']} (${driverDetails['vehicle_colour']})',
+                  '${driverDetails['vehicle_brand']} (${driverDetails['vehicle_colour']})',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mie_admin/utils/constants.dart';
-
 import '../route/route_expanded_card.dart';
 
 class ManualExpandedCard extends StatelessWidget {

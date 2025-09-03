@@ -62,6 +62,7 @@ class _AppButtonState extends State<AppButton> {
           isProcessing
               ? widget.processingText ?? 'Processing...'
               : widget.btnText,
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: widget.fontSize ?? 12.5.sp,
             color: widget.textColor,

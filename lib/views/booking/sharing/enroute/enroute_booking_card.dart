@@ -79,6 +79,7 @@ class EnrouteBookingCard extends StatelessWidget {
                         backgroundColor: Colors.transparent,
                         insetPadding: EdgeInsets.symmetric(horizontal: 24.w),
                         child: PaymentDetailsDialog(
+                          tipAmount: _getbooking['tip_amount'].toString(),
                           pMethod: _getbooking['payment_method'] ?? 'Via',
                           person: '${_getbooking['number_of_people'] ?? '1'}',
                           bookingAmount:
@@ -156,7 +157,7 @@ class EnrouteBookingCard extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h)
                 .copyWith(bottom: 8.h),
             child: Text(
-              _getbooking['driver_last_location_update'],
+              _getbooking['driver_last_location_update']??'Loading...',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

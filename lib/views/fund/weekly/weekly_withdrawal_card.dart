@@ -48,6 +48,7 @@ class WeeklyWithdrawalCard extends StatelessWidget {
   }
 
   Widget _buildContents(context) {
+    Map? accountDetails = weeklyWithdrawal['driver_account_details'];
     return Padding(
       padding: EdgeInsets.all(12.w),
       child: Row(
@@ -95,7 +96,14 @@ class WeeklyWithdrawalCard extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
+          if((accountDetails == null || accountDetails.isEmpty))
+            Expanded(
+              flex: 5,
+              child: AppButton(btnText: 'Account\nNot Added', onPressed: () {
+
+              },paddingVertical: 10.h,backgroundColor: appColor.greyThemeColor,textColor: appColor.color353535,),
+            )
+            else Expanded(
             flex: 5,
             child: Column(
               children: [
@@ -113,8 +121,7 @@ class WeeklyWithdrawalCard extends StatelessWidget {
                                 EdgeInsets.symmetric(horizontal: 24.w),
                             // same as quick withdrawal ui so i use it
                             child: AccountInfoDialog(
-                                data:
-                                    weeklyWithdrawal['driver_account_details']),
+                                data: accountDetails??{}),
                           );
                         });
                   },

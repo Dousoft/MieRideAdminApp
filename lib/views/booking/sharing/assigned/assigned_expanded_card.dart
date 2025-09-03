@@ -1,11 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:timezone/timezone.dart' as tz;
-import 'package:timezone/data/latest.dart' as tz;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mie_admin/views/booking/sharing/manual/manual_expanded_card.dart';
-
 import '../../../../utils/constants.dart';
 
 class AssignedExpandedCard extends StatelessWidget {

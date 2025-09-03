@@ -14,7 +14,7 @@ class EmailListController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getIntracTransfer();
+    getEmailData();
     scrollController.addListener(_scrollListener);
   }
 
@@ -28,7 +28,7 @@ class EmailListController extends GetxController {
     }
   }
 
-  Future<void> getIntracTransfer() async {
+  Future<void> getEmailData() async {
     if (currentPage.value == 1) {
       isLoading.value = true;
       emailListData.clear();
@@ -42,7 +42,6 @@ class EmailListController extends GetxController {
     try {
       final response = await networkClient.postRequest(api: 'https://midridechat.vercel.app/api/email/list',
           endPoint: '', payload: payload);
-      // final newItems = response.data['data'];
       if (response.data['success'] == true) {
         final newItems = List<Map<String, dynamic>>.from(response.data['data']);
 
@@ -66,6 +65,20 @@ class EmailListController extends GetxController {
     }
   }
 
+  Future<void> markAsReadEmail(int index, String id) async {
+    try {
+      final response = await networkClient.postRequest(api: 'https://midridechat.vercel.app/api/email/mark-as-read',
+          endPoint: '', payload: {'emailUID': id});
+      if (response.data['success'] == true) {
+        emailListData.removeAt(index);
+      }
+    } catch (e) {
+      rethrow;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   Future<void> loadMoreData() async {
     if (!hasMoreData.value) return;
 
@@ -73,7 +86,7 @@ class EmailListController extends GetxController {
     currentPage.value++;
     final prevLength = emailListData.length;
 
-    await getIntracTransfer();
+    await getEmailData();
 
     final newLength = emailListData.length;
     hasMoreData.value = newLength > prevLength;
@@ -83,7 +96,7 @@ class EmailListController extends GetxController {
 
   Future<void> refreshData() async{
     currentPage.value = 1;
-    await getIntracTransfer();
+    await getEmailData();
   }
 
   @override
