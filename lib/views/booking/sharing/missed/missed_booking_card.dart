@@ -361,7 +361,7 @@ class MissedBookingCard extends StatelessWidget {
               spacing: 5.h,
               children: [
                 Text(
-                  '${driverDetails['vehicle_name']} (${driverDetails['vehicle_colour']})',
+                  '${driverDetails['vehicle_brand']} (${driverDetails['vehicle_colour']})',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(

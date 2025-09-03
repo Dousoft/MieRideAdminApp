@@ -79,6 +79,7 @@ class AssignedBookingCard extends StatelessWidget {
                         backgroundColor: Colors.transparent,
                         insetPadding: EdgeInsets.symmetric(horizontal: 24.w),
                         child: PaymentDetailsDialog(
+                          tipAmount: _getbooking['tip_amount'].toString(),
                           pMethod: _getbooking['payment_method'] ?? 'Via',
                           person: '${_getbooking['number_of_people'] ?? '1'}',
                           bookingAmount:

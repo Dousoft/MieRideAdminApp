@@ -89,7 +89,6 @@ class CancelledController extends GetxController {
   }
 
   Future<void> refundAmount({required Map payload, required int index}) async {
-    isLoading.value = true;
     try {
       final response = await networkClient.postRequest(
           endPoint: 'refund-user-cancellation-charge', payload: payload);
@@ -103,8 +102,6 @@ class CancelledController extends GetxController {
       EasyLoading.showToast(data['message']);
     } catch (e) {
       rethrow;
-    } finally {
-      isLoading.value = false;
     }
   }
 

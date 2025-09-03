@@ -77,10 +77,22 @@ class AssignedDriverController extends GetxController {
   }
 
   Future<void> assignDriver({required String rootId}) async {
+
+    if (isExtraCharges.value && extraChargeController.text.trim().isEmpty) {
+      EasyLoading.showToast('Please enter extra charges.');
+      return;
+    }
+
+    if (isIncreasePickupTime.value && pickupTimeController.text.trim().isEmpty) {
+      EasyLoading.showToast('Please enter increase pickup time.');
+      return;
+    }
+
     if (selectedDriverIds.isEmpty) {
       EasyLoading.showToast('Select your driver first.');
       return;
     }
+
     isAssignedLoading.value = true;
     try {
       final payload = {

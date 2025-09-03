@@ -10,100 +10,124 @@ import 'cancelled_booking_recept.dart';
 
 class CancelledBookingCard extends StatelessWidget {
   final int index;
-  CancelledBookingCard({super.key,
-    required this.index});
+  CancelledBookingCard({super.key, required this.index});
 
   final CancelledController controller = Get.find<CancelledController>();
+  final RxBool isUpdating = false.obs;
 
   Map<String, dynamic> get booking => controller.cancelledBookingData[index];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-      decoration: BoxDecoration(
-        color: appColor.whiteThemeColor,
-        borderRadius: BorderRadius.circular(12.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade300,
-            blurRadius: 4,
-            spreadRadius: 1,
-            offset: const Offset(0, 2),
-          )
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildHeader(),
-          Padding(
-            padding: EdgeInsets.all(12.sp),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildInfoRow('Username :- ',
-                          '${booking["user_details"]['first_name']} ${booking["user_details"]['last_name']}'),
-                    ),
-                    Text('${booking["booking_date"]} ${booking['booking_time']}'.toDateMonthYearTimeFormat(),
-                      style: TextStyle(
-                        fontSize: 11.sp,
-                        color: appColor.color6B6B6B,
-                        letterSpacing: -0.5,
-                        fontWeight: FontWeight.w700,
-                      ),)
-                  ],
-                ),
-                2.verticalSpace,
-                Row(
-                  children: [
-                    Expanded(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildInfoRow('Pickup Address :- ', booking['source']),
-                        2.verticalSpace,
-                        _buildInfoRow(
-                            'Drop-off Address :- ', booking["destination"]),
-                      ],
-                    )),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: appColor.greyDarkThemeColor,
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                      padding: EdgeInsets.all(2.sp).copyWith(bottom: 0),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(4.r),
-                            child: Image.asset(
-                              appIcon.bgperson,
-                              width: 18.w,
-                              height: 18.w,
-                            ),
-                          ),
-                          Text(
-                            '0${booking['total_number_of_people'] ?? 1}',
-                            style: TextStyle(
-                                fontSize: 13.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Obx(
+          () => IgnorePointer(
+            ignoring: isUpdating.value,
+            child: Opacity(
+              opacity: isUpdating.value ? 0.4 : 1,
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                decoration: BoxDecoration(
+                  color: appColor.whiteThemeColor,
+                  borderRadius: BorderRadius.circular(12.r),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 4,
+                      spreadRadius: 1,
+                      offset: const Offset(0, 2),
                     )
                   ],
-                )
-              ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildHeader(),
+                    Padding(
+                      padding: EdgeInsets.all(12.sp),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _buildInfoRow('Username :- ',
+                                    '${booking["user_details"]['first_name']} ${booking["user_details"]['last_name']}'),
+                              ),
+                              Text(
+                                '${booking["booking_date"]} ${booking['booking_time']}'
+                                    .toDateMonthYearTimeFormat(),
+                                style: TextStyle(
+                                  fontSize: 11.sp,
+                                  color: appColor.color6B6B6B,
+                                  letterSpacing: -0.5,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              )
+                            ],
+                          ),
+                          2.verticalSpace,
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _buildInfoRow(
+                                      'Pickup Address :- ', booking['source']),
+                                  2.verticalSpace,
+                                  _buildInfoRow('Drop-off Address :- ',
+                                      booking["destination"]),
+                                ],
+                              )),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: appColor.greyDarkThemeColor,
+                                  borderRadius: BorderRadius.circular(4.r),
+                                ),
+                                padding:
+                                    EdgeInsets.all(2.sp).copyWith(bottom: 0),
+                                child: Column(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      child: Image.asset(
+                                        appIcon.bgperson,
+                                        width: 18.w,
+                                        height: 18.w,
+                                      ),
+                                    ),
+                                    Text(
+                                      '0${booking['total_number_of_people'] ?? 1}',
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    _buildActionButtons()
+                  ],
+                ),
+              ),
             ),
           ),
-          _buildActionButtons()
-        ],
-      ),
+        ),
+        Obx(() => isUpdating.value
+            ? CircularProgressIndicator(
+                color: Colors.black,
+                strokeWidth: 2,
+              )
+            : SizedBox.shrink())
+      ],
     );
   }
 
@@ -144,6 +168,8 @@ class CancelledBookingCard extends StatelessWidget {
                     chargedAmount: chargedAmount,
                   ),
                 );
+
+                isUpdating.value = true;
                 if (result != null && result["confirmed"] == true) {
                   Map payload = {
                     'booking_id': booking['id'],
@@ -151,6 +177,7 @@ class CancelledBookingCard extends StatelessWidget {
                     'refund_reason': result['refund_reason'],
                   };
                   await controller.refundAmount(payload: payload, index: index);
+                  isUpdating.value = false;
                 }
               },
             )

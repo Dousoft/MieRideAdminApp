@@ -89,12 +89,14 @@ class InteracTransferController extends GetxController {
   Future<void> updateIntracTransferStatus(
       {required String intracId,
       required String status,
+      String? reason,
       required int index}) async {
     Map<String, dynamic> payload = {
       'id': intracId,
       'status': status,
-      'comment': 'Incorrect Transfer Amount'
+      if(reason != null)'comment': reason
     };
+
     try {
       final response = await networkClient.postRequest(
           endPoint: 'update-intrac-e-transfer-status', payload: payload);

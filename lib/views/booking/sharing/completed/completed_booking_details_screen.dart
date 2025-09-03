@@ -99,7 +99,12 @@ class CompletedBookingDetailsScreen extends StatelessWidget {
                   Row(
                     children: [
                       _infoColumn('Total Amount',
-                          '\$${booking['total_trip_cost'] ?? 0}', 1),
+                          '\$${booking['total_trip_cost'] ?? 0}', 3),
+                      if (booking['tip_amount'] != null &&
+                          booking['tip_amount'].toString() != '0' &&
+                          booking['tip_amount'].toString() != 'null')
+                        _infoColumn(
+                            'Tip Amount', '\$${booking['tip_amount'] ?? 0}', 2),
                     ],
                   ),
                 ],
@@ -210,7 +215,7 @@ class CompletedBookingDetailsScreen extends StatelessWidget {
                   spacing: 2.w,
                   children: [
                     Text(
-                      "(${double.parse((booking['driver_rating']??0).toString()).toStringAsFixed(1)})",
+                      "(${double.parse((booking['driver_rating'] ?? 0).toString()).toStringAsFixed(1)})",
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.bold,
@@ -229,7 +234,7 @@ class CompletedBookingDetailsScreen extends StatelessWidget {
               spacing: 5.h,
               children: [
                 Text(
-                  '${driverDetails['vehicle_name']} (${driverDetails['vehicle_colour']})',
+                  '${driverDetails['vehicle_brand']} (${driverDetails['vehicle_colour']})',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(

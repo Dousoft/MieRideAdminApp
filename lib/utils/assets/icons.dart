@@ -50,6 +50,7 @@ class AppIcon {
 
   // mie
   String date = 'assets/icons/home/date.png';
+  String commingsoon = 'assets/icons/commingsoon.png';
 
   //
 

@@ -12,6 +12,7 @@ class PaymentDetailsDialog extends StatelessWidget {
   final String surgeAmount;
   final String bookingAmount;
   final String totalAmount;
+  final String? tipAmount;
 
   const PaymentDetailsDialog(
       {super.key,
@@ -20,6 +21,7 @@ class PaymentDetailsDialog extends StatelessWidget {
       required this.adminFee,
       required this.driverEarn,
       required this.surgeAmount,
+      this.tipAmount,
       required this.bookingAmount,
       required this.totalAmount});
 
@@ -37,6 +39,7 @@ class PaymentDetailsDialog extends StatelessWidget {
           _paymentRow("No. of Person", '0$person'),
           _paymentRow("Booking Amount", "\$${double.parse(bookingAmount).toStringAsFixed(2)}"),
           _paymentRow("Surge Amount", "\$${double.parse(surgeAmount).toStringAsFixed(2)}"),
+          if(tipAmount != null && tipAmount != '0'&& tipAmount != 'null')_paymentRow("Tip Amount", "\$${double.parse(tipAmount??'0').toStringAsFixed(2)}"),
           _paymentRow("Total Amount", "\$${double.parse(totalAmount).toStringAsFixed(2)}"),
           _paymentRow("Admin Fee", "\$${double.parse(adminFee).toStringAsFixed(2)}"),
           _paymentRow("Driver Earn", "\$${double.parse(driverEarn).toStringAsFixed(2)}"),

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mie_admin/controllers/fund/email_list_controller.dart';
 import 'package:mie_admin/utils/constants.dart';
 import 'package:mie_admin/views/fund/email/email_details_screen.dart';
 
@@ -12,10 +13,13 @@ class EmailCard extends StatelessWidget {
 
   EmailCard({super.key, required this.data, required this.index});
 
+  final controller = Get.find<EmailListController>();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        controller.markAsReadEmail(index, data['uid'].toString());
         Get.to(()=> EmailDetailsScreen(emailData: data));
       },
       child: Container(
