@@ -6,13 +6,13 @@ import 'assets/icons.dart';
 import 'assets/images.dart';
 import 'colors.dart';
 
-// /// test mode base url
-// String appApiBaseUrl = 'https://testapi.mieride.ca/api/';
-// String appImageBaseUrl = 'https://testapi.mieride.ca/storage/';
+/// test mode base url
+String appApiBaseUrl = 'https://testapi.mieride.ca/api/';
+String appImageBaseUrl = 'https://testapi.mieride.ca/storage/';
 
-/// production mode base url
-String appApiBaseUrl = 'https://api.mieride.ca/api/';
-String appImageBaseUrl = 'https://api.mieride.ca/storage/';
+// /// production mode base url
+// String appApiBaseUrl = 'https://api.mieride.ca/api/';
+// String appImageBaseUrl = 'https://api.mieride.ca/storage/';
 
 /// one signal app id
 String appNotificationId = 'dbeb1ae1-7735-4df3-9a49-ddc21011243c';
