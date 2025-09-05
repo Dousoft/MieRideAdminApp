@@ -38,40 +38,55 @@ class _EnrouteScreenState extends State<EnrouteScreen> {
         }
 
         if (controller.acceptedBookingData.isEmpty) {
-          return const Center(
-            child: Text(
-              "No enroute booking found.",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          return RefreshIndicator(
+            onRefresh: controller.refreshData,
+            color: appColor.blackThemeColor,
+            child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              children: [
+                SizedBox(height: Get.height * 0.34),
+                Center(
+                  child: Text(
+                    "No enroute booking found.",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ],
             ),
           );
         }
 
-        return ListView.builder(
-          padding: EdgeInsets.only(bottom: (!controller.hasMoreData.value)?12.h:32.h),
-          controller: controller.scrollController,
-          itemCount: controller.acceptedBookingData.length + 1,
-          itemBuilder: (context, index) {
-            if (index == controller.acceptedBookingData.length) {
-              if (controller.isLoadingMore.value) {
-                return BuildSmallLoader();
-              } else if (!controller.hasMoreData.value) {
-                return Padding(
-                  padding: EdgeInsets.only(top: 8.h),
-                  child: Center(
-                    child: Text(
-                      "No more data",
-                      style: TextStyle(color: Colors.black),
+        return RefreshIndicator(
+          onRefresh: controller.refreshData,
+          color: appColor.blackThemeColor,
+          child: ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: EdgeInsets.only(bottom: (!controller.hasMoreData.value)?12.h:32.h),
+            controller: controller.scrollController,
+            itemCount: controller.acceptedBookingData.length + 1,
+            itemBuilder: (context, index) {
+              if (index == controller.acceptedBookingData.length) {
+                if (controller.isLoadingMore.value) {
+                  return BuildSmallLoader();
+                } else if (!controller.hasMoreData.value) {
+                  return Padding(
+                    padding: EdgeInsets.only(top: 8.h),
+                    child: Center(
+                      child: Text(
+                        "No more data",
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
-                  ),
-                );
-              } else {
-                return const SizedBox.shrink();
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
               }
-            }
-            return EnrouteBookingCard(
-                booking: controller.acceptedBookingData[index],
-                index: index);
-          },
+              return EnrouteBookingCard(
+                  booking: controller.acceptedBookingData[index],
+                  index: index);
+            },
+          ),
         );
       }),
     );

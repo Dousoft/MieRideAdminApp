@@ -46,12 +46,13 @@ class _EmailListScreenState extends State<EmailListScreen> {
             child: ListView(
               physics: const AlwaysScrollableScrollPhysics(),
               children: [
-                SizedBox(height: Get.height*0.7, child: Center(
+                SizedBox(height: Get.height * 0.38),
+                Center(
                   child: Text(
                     "No Email found.",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
-                )),
+                ),
               ],
             ),
           );

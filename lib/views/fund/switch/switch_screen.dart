@@ -51,12 +51,13 @@ class _SwitchScreenState extends State<SwitchScreen> {
                   child: ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [
-                      SizedBox(height: Get.height*0.7, child: Center(
+                      SizedBox(height: Get.height * 0.34),
+                      Center(
                         child: Text(
                           "No Switch Account found.",
                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                         ),
-                      )),
+                      ),
                     ],
                   ),
                 );

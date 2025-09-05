@@ -80,6 +80,7 @@ class AblyService {
         routeRefresh();
         break;
 
+      case "ride-canceled":
       case "booking-cancelled":
       case "booking-canceled-auto":
         groupRefresh();
@@ -103,13 +104,12 @@ class AblyService {
         break;
 
       case "admin-booking-update":
+        acceptedRefresh();
         enrouteRefresh();
         assignedRefresh();
-        acceptedRefresh();
         break;
 
       case "ride-started":
-      case "ride-canceled":
       case "ride-status-updated":
       case "booking-arrived":
       case "booking-dropped":
@@ -122,16 +122,6 @@ class AblyService {
       default:
         debugPrint('🔕 Unknown event : $eventName');
         break;
-    }
-  }
-
-  void routeRefresh() {
-    if (Get.isRegistered<RouteController>()) {
-      final route = Get.find<RouteController>();
-      route.currentPage(1);
-      route.getRouteBooking();
-    } else {
-      debugPrint("RouteController not registered");
     }
   }
 
@@ -149,13 +139,13 @@ class AblyService {
     }
   }
 
-  void manualRefresh() {
-    if (Get.isRegistered<ManualController>()) {
-      final manual = Get.find<ManualController>();
-      manual.currentPage(1);
-      manual.getManualBooking();
+  void routeRefresh() {
+    if (Get.isRegistered<RouteController>()) {
+      final route = Get.find<RouteController>();
+      route.currentPage(1);
+      route.getRouteBooking();
     } else {
-      debugPrint("ManualController not registered");
+      debugPrint("RouteController not registered");
     }
   }
 
@@ -179,13 +169,13 @@ class AblyService {
     }
   }
 
-  void enrouteRefresh() {
-    if (Get.isRegistered<EnrouteController>()) {
-      final enroute = Get.find<EnrouteController>();
-      enroute.currentPage(1);
-      enroute.getEnrouteBooking();
+  void manualRefresh() {
+    if (Get.isRegistered<ManualController>()) {
+      final manual = Get.find<ManualController>();
+      manual.currentPage(1);
+      manual.getManualBooking();
     } else {
-      debugPrint("EnrouteController not registered");
+      debugPrint("ManualController not registered");
     }
   }
 
@@ -199,13 +189,13 @@ class AblyService {
     }
   }
 
-  void cancelledRefresh() {
-    if (Get.isRegistered<CancelledController>()) {
-      final cancel = Get.find<CancelledController>();
-      cancel.currentPage(1);
-      cancel.getCancelledBooking();
+  void enrouteRefresh() {
+    if (Get.isRegistered<EnrouteController>()) {
+      final enroute = Get.find<EnrouteController>();
+      enroute.currentPage(1);
+      enroute.getEnrouteBooking();
     } else {
-      debugPrint("CancelledController not registered");
+      debugPrint("EnrouteController not registered");
     }
   }
 
@@ -216,6 +206,16 @@ class AblyService {
       complete.getCompletedBooking();
     } else {
       debugPrint("CompletedController not registered");
+    }
+  }
+
+  void cancelledRefresh() {
+    if (Get.isRegistered<CancelledController>()) {
+      final cancel = Get.find<CancelledController>();
+      cancel.currentPage(1);
+      cancel.getCancelledBooking();
+    } else {
+      debugPrint("CancelledController not registered");
     }
   }
 

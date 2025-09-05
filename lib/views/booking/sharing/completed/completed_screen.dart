@@ -43,39 +43,55 @@ class _CompletedScreenState extends State<CompletedScreen> {
               }
 
               if (controller.completedBookingData.isEmpty) {
-                return const Center(
-                  child: Text(
-                    "No ride completed found.",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                return RefreshIndicator(
+                  onRefresh: controller.refreshData,
+                  color: appColor.blackThemeColor,
+                  child: ListView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    children: [
+                      SizedBox(height: Get.height * 0.28),
+                      Center(
+                        child: Text(
+                          "No completed booking found.",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
                   ),
                 );
               }
 
-              return ListView.builder(
-                padding: EdgeInsets.only(bottom: (!controller.hasMoreData.value)?12.h:32.h),
-                controller: controller.scrollController,
-                itemCount: controller.completedBookingData.length + 1,
-                itemBuilder: (context, index) {
-                  if (index == controller.completedBookingData.length) {
-                    if (controller.isLoadingMore.value) {
-                      return BuildSmallLoader();
-                    } else if (!controller.hasMoreData.value) {
-                      return Padding(
-                        padding: EdgeInsets.only(top: 8.h),
-                        child: Center(
-                          child: Text(
-                            "No more data",
-                            style: TextStyle(color: Colors.black),
+              return RefreshIndicator(
+                onRefresh: controller.refreshData,
+                color: appColor.blackThemeColor,
+                child: ListView.builder(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.only(bottom: (!controller.hasMoreData.value)?12.h:32.h),
+                  controller: controller.scrollController,
+                  itemCount: controller.completedBookingData.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index == controller.completedBookingData.length) {
+                      if (controller.isLoadingMore.value) {
+                        return BuildSmallLoader();
+                      } else if (!controller.hasMoreData.value) {
+                        return Padding(
+                          padding: EdgeInsets.only(top: 8.h),
+                          child: Center(
+                            child: Text(
+                              "No more data",
+                              style: TextStyle(color: Colors.black),
+                            ),
                           ),
-                        ),
-                      );
-                    } else {
-                      return const SizedBox.shrink();
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
                     }
-                  }
-                  return CompletedBookingCard(
-                      booking: controller.completedBookingData[index]);
-                },
+                    return CompletedBookingCard(
+                        booking: controller.completedBookingData[index]);
+                  },
+                ),
               );
             }),
           ),

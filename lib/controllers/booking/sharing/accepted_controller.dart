@@ -80,4 +80,10 @@ class AcceptedController extends GetxController {
     scrollController.dispose();
     super.onClose();
   }
+
+  Future<void> refreshData() async {
+    currentPage.value = 1;
+    hasMoreData.value = true;
+    await getAcceptedBooking();
+  }
 }

@@ -52,15 +52,14 @@ class _InteracTransferScreenState extends State<InteracTransferScreen> {
                   child: ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [
-                      SizedBox(
-                          height: Get.height * 0.6,
-                          child: Center(
-                            child: Text(
-                              "No Interac E-Transfer found.",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
-                            ),
-                          )),
+                      SizedBox(height: Get.height * 0.3),
+                      Center(
+                        child: Text(
+                          "No Interac E-Transfer found.",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                      ),
                     ],
                   ),
                 );

@@ -37,42 +37,57 @@ class _RouteScreenState extends State<RouteScreen> {
         }
 
         if (controller.routeBookingData.isEmpty) {
-          return const Center(
-            child: Text(
-              "No ride route found.",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          return RefreshIndicator(
+            onRefresh: controller.refreshData,
+            color: appColor.blackThemeColor,
+            child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              children: [
+                SizedBox(height: Get.height * 0.34),
+                Center(
+                  child: Text(
+                    "No ride route found.",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ],
             ),
           );
         }
 
-        return ListView.builder(
-          padding: EdgeInsets.only(bottom: (!controller.hasMoreData.value)?12.h:32.h),
-          controller: controller.scrollController,
-          itemCount: controller.routeBookingData.length + 1,
-          itemBuilder: (context, index) {
-            if (index == controller.routeBookingData.length) {
-              if (controller.isLoadingMore.value) {
-                return _buildLoader();
-              } else if (!controller.hasMoreData.value) {
-                return Padding(
-                  padding: EdgeInsets.only(top: 8.h),
-                  child: Center(
-                    child: Text(
-                      "No more data",
-                      style: TextStyle(color: Colors.black),
+        return RefreshIndicator(
+          onRefresh: controller.refreshData,
+          color: appColor.blackThemeColor,
+          child: ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: EdgeInsets.only(bottom: (!controller.hasMoreData.value)?12.h:32.h),
+            controller: controller.scrollController,
+            itemCount: controller.routeBookingData.length + 1,
+            itemBuilder: (context, index) {
+              if (index == controller.routeBookingData.length) {
+                if (controller.isLoadingMore.value) {
+                  return _buildLoader();
+                } else if (!controller.hasMoreData.value) {
+                  return Padding(
+                    padding: EdgeInsets.only(top: 8.h),
+                    child: Center(
+                      child: Text(
+                        "No more data",
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
-                  ),
-                );
-              } else {
-                return const SizedBox.shrink();
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
               }
-            }
-            // return Text(index.toString());
+              // return Text(index.toString());
 
-            return RouteBookingCard(
-                route: controller.routeBookingData[index],
-                index: index);
-          },
+              return RouteBookingCard(
+                  route: controller.routeBookingData[index],
+                  index: index);
+            },
+          ),
         );
       }),
     );

@@ -50,12 +50,13 @@ class _WeeklyWithdrawalScreenState extends State<WeeklyWithdrawalScreen> {
                   child: ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [
-                      SizedBox(height: Get.height*0.6, child: Center(
+                      SizedBox(height: Get.height * 0.32),
+                      Center(
                         child: Text(
                           "No Weekly Withdrawal found.",
                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                         ),
-                      )),
+                      ),
                     ],
                   ),
                 );

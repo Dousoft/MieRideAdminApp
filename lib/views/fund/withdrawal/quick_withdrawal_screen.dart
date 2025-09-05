@@ -50,12 +50,13 @@ class _QuickWithdrawalScreenState extends State<QuickWithdrawalScreen> {
                   child: ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [
-                      SizedBox(height: Get.height*0.6, child: Center(
+                      SizedBox(height: Get.height * 0.32),
+                      Center(
                         child: Text(
                           "No Quick Withdrawal found.",
                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                         ),
-                      )),
+                      ),
                     ],
                   ),
                 );

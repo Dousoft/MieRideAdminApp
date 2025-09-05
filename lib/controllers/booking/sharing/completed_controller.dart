@@ -134,4 +134,8 @@ class CompletedController extends GetxController {
     currentPage.value = 1;
     getCompletedBooking();
   }
+
+  Future<void> refreshData() async {
+    clearAndApplyFilters();
+  }
 }

@@ -190,4 +190,8 @@ class CancelledController extends GetxController {
     currentPage.value = 1;
     getCancelledBooking();
   }
+
+  Future<void> refreshData() async {
+    clearAndApplyFilters();
+  }
 }

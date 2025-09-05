@@ -96,6 +96,12 @@ class MissedController extends GetxController {
     }
   }
 
+  Future<void> refreshData() async {
+    currentPage.value = 1;
+    hasMoreData.value = true;
+    await getMissedBooking();
+  }
+
   Future<void> loadMoreData() async {
     if (!hasMoreData.value) return;
 
