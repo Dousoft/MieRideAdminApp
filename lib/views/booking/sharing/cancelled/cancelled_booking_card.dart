@@ -159,7 +159,6 @@ class CancelledBookingCard extends StatelessWidget {
               "Refund",
               appColor.greenThemeColor,
               onPressed: () async {
-                print(booking);
                 var chargedAmount =
                     double.parse(booking['total_trip_cost'].toString()) -
                         double.parse(booking['refund_amount'].toString());
@@ -177,8 +176,8 @@ class CancelledBookingCard extends StatelessWidget {
                     'refund_reason': result['refund_reason'],
                   };
                   await controller.refundAmount(payload: payload, index: index);
-                  isUpdating.value = false;
                 }
+                isUpdating.value = false;
               },
             )
           else if ((booking['cancel_by'] ?? '') != 'admin')

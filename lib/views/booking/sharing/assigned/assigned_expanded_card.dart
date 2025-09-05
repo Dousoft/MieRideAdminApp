@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mie_admin/views/booking/sharing/manual/manual_expanded_card.dart';
 import '../../../../utils/constants.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class AssignedExpandedCard extends StatelessWidget {
   final Map item;
@@ -160,9 +161,27 @@ class _AssignmentTimerState extends State<AssignmentTimer> {
   @override
   void initState() {
     super.initState();
+    // canada time zone
+    final canada = tz.getLocation('America/Toronto');
+
     try {
-      createdAt = DateTime.parse(widget.createdAt);
+      // here canada normal time to parse date time
+      final parsed = DateTime.parse(widget.createdAt);
+
+      // here set canada time zone to parsed date
+      createdAt = tz.TZDateTime(
+        canada,
+        parsed.year,
+        parsed.month,
+        parsed.day,
+        parsed.hour,
+        parsed.minute,
+        parsed.second,
+        parsed.millisecond,
+        parsed.microsecond,
+      );
       expiryTime = createdAt.add(const Duration(minutes: 2));
+
       _startTimer();
     } catch (e) {
       remaining = Duration.zero;
@@ -178,7 +197,8 @@ class _AssignmentTimerState extends State<AssignmentTimer> {
   }
 
   void _updateRemaining() {
-    final now = DateTime.now();
+    final canada = tz.getLocation('America/Toronto');
+    final now = tz.TZDateTime.now(canada);
     final diff = expiryTime.difference(now);
 
     if (diff.isNegative) {
